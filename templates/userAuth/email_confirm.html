@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+body {
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    height: 100vh; /* Set body height to 100% of viewport height */
+    background-image: url('{% static 'images/mou1.jpg' %}'); /* Specify the path to your GIF image */
+    background-size: cover; /* Cover the entire viewport */
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif; /* Optional: Set font family */
+}
+
+ .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    h1, {
+        color: black;
+    }
+</style>
+<div class="form-container" >
+<center>
+<form method="POST" class="myform" data-aos="zoom-in" data-tilt>
+    <h3 class="text-white">Email Conformation</h3>
+    {% csrf_token %}
+    <div><center>
+        <label class="form-label" for="email">Enter your email address:</label>
+        <input type="email" id="email" name="email">
+
+    <button type="submit" style="padding: 3px 10px"  class="attractive-btn " >Submit</button>
+
+    {% if messages %}
+    {% for message in messages %}
+        <div style="color:red;">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+        </div>
+
+</form>
+
+
+{% endblock %}

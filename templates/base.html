@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'assests/mycss/style.css' %}">
+
+
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device, initial-scale=1">
+
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+			<!--
+			CSS
+			============================================= -->
+			<link rel="stylesheet" href="{% static 'assests/css/linearicons.css' %}">
+			<link rel="stylesheet" href="{% static 'assests/css/font-awesome.min.css' %}">
+			<link rel="stylesheet" href="{% static 'assests/css/bootstrap.css' %}">
+			<link rel="stylesheet" href="{% static 'assests/css/magnific-popup.css' %}">
+			<link rel="stylesheet" href="{% static 'assests/css/animate.min.css' %}">
+			<link rel="stylesheet" href="{% static 'assests/css/owl.carousel.css' %}">
+			<link rel="stylesheet" href="{% static 'assests/css/main.css' %}">
+
+
+		 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+
+
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mt-1">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'app1:home' %}">Home</a>
+                    </li>
+
+                     <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'app1:packages' %}">Packages</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">All Category</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href=""></a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'UserAuthentication:register' %}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'UserAuthentication:login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'UserAuthentication:logout' %}">Logout</a>
+                    </li>
+                </ul>
+                <form class="form-inline">
+                    <div class="input-group">
+                        <input class="form-control" type="search" placeholder="Search your products" aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="attractive-btn" type="submit">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+
+{% block content %}
+{% endblock %}
+
+<script src="{% static 'css/vanilla-tilt.js' %}"></script>
+</body>
+
+<script>
+  AOS.init();
+</script>
+
+
+
+<!--&lt;!&ndash; start footer Area &ndash;&gt;-->
+<!--			<footer class="footer-area section-gap">-->
+<!--				<div class="container">-->
+<!--					<div class="row">-->
+<!--						<div class="col-lg-5 col-md-6 col-sm-6">-->
+<!--							<div class="single-footer-widget">-->
+<!--								<h6>About Us</h6>-->
+<!--								<p>-->
+<!--									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.-->
+<!--								</p>-->
+<!--								&lt;!&ndash; Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. &ndash;&gt;-->
+<!--            		<p class="footer-text">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>-->
+<!--            		&lt;!&ndash; Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. &ndash;&gt;-->
+<!--							</div>-->
+<!--						</div>-->
+<!--						<div class="col-lg-5  col-md-6 col-sm-6">-->
+<!--							<div class="single-footer-widget">-->
+<!--								<h6>Newsletter</h6>-->
+<!--								<p>Stay update with our latest</p>-->
+<!--								<div class="" id="mc_embed_signup">-->
+
+<!--										<form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="form-inline">-->
+
+<!--										<div class="d-flex flex-row">-->
+
+<!--											<input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" required="" type="email">-->
+
+
+<!--				                            	<button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>-->
+<!--				                            	<div style="position: absolute; left: -5000px;">-->
+<!--													<input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">-->
+<!--												</div>-->
+
+<!--											&lt;!&ndash; <div class="col-lg-4 col-md-4">-->
+<!--												<button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button>-->
+<!--											</div>  &ndash;&gt;-->
+<!--										</div>-->
+<!--										<div class="info"></div>-->
+<!--										</form>-->
+<!--								</div>-->
+<!--								</div>-->
+<!--						</div>-->
+<!--						<div class="col-lg-2 col-md-6 col-sm-6 social-widget">-->
+<!--							<div class="single-footer-widget">-->
+<!--								<h6>Follow Us</h6>-->
+<!--								<p>Let us be social</p>-->
+<!--								<div class="footer-social d-flex align-items-center">-->
+<!--									<a href="#"><i class="fa fa-facebook"></i></a>-->
+<!--									<a href="#"><i class="fa fa-twitter"></i></a>-->
+<!--									<a href="#"><i class="fa fa-dribbble"></i></a>-->
+<!--									<a href="#"><i class="fa fa-behance"></i></a>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</footer>-->
+<!--			&lt;!&ndash; End footer Area &ndash;&gt;-->
+
+
+
+
+</html>

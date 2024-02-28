@@ -1,0 +1,237 @@
+
+body {
+    background-color: #E3F5FD;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    padding-bottom: 70px;
+}
+
+.myform {
+    width: 90%; /* Adjust width for responsiveness */
+    max-width: 400px; /* Limit maximum width */
+    top-margin:400
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 3px 3px 10px rgba(4.9, 8.5, 123, 9.1);
+    width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2); /* Adjust the alpha value for transparency */
+    backdrop-filter: blur(1px); /* Adjust the blur amount as needed */
+}
+
+/* Style for form labels */
+.form-label {
+    color: #47b6ca
+    font-weight: bold;
+    background-color: transparent;
+}
+
+.form-control {
+    background-color: transparent; /* Set input background color to transparent */
+    border: 1px solid transparent; /* Set border color to transparent */
+    border-radius: 5px; /* Add border radius to input */
+    padding: 8px; /* Add padding to input */
+    width: 100%; /* Set input width to 100% */
+    box-sizing: border-box; /* Include padding and border in input's total width */
+}
+/* Style for form inputs */
+.form-control {
+    background-color: rgba(0, 255, 0, 0.5); /* Set translucent white background color */
+    border: 1px solid rgba(0, 255, 255, 0.5); /* Set translucent white border */
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    opacity: .8;
+
+}
+
+
+.login-links {
+    text-align: center;
+    margin-top: 20px;
+    color: black;
+}
+
+.login-links a {
+    color: #47b6ca;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 5px;
+    font-size: 18px;
+}
+
+.login-links a:hover {
+    text-decoration: underline;
+}
+
+
+
+.attractive-btn {
+    background-color: rgba(2, 0, 255, 0.5); /* Set translucent white background color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Add border radius */
+    padding: 10px 20px; /* Add padding to the button */
+    color: #fff; /* Set text color to white */
+    font-weight: bold; /* Set font weight to bold */
+    cursor: pointer; /* Set cursor to pointer on hover */
+    transition: background-color 0.3s; /* Add transition for smooth hover effect */
+    animation: light-travel 2s infinite;
+}
+
+.attractive-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3); /* Set translucent white background color on hover */
+}
+
+
+
+/* register style details */
+
+.register-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh; /* Set the height of the container to 100% of the viewport height */
+    margin-top: 40px;
+
+}
+
+.register-body {
+    background-color: #E3F5FD;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    padding-bottom: 70px;
+}
+
+.register-myform {
+    width: 90%; /* Adjust width for responsiveness */
+    max-width: 400px; /* Limit maximum width */
+    top-margin: 900;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 3px 3px 10px rgba(4.9, 8.5, 123, 9.1);
+    width: 400px;
+    border: 4px ridge #ccc;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2); /* Adjust the alpha value for transparency */
+    backdrop-filter: blur(1px); /* Adjust the blur amount as needed */
+    animation: light-travel 2s infinite;
+}
+
+@keyframes light-travel {
+    0% {
+        border-color: transparent; /* Start with transparent border */
+    }
+    20% {
+        border-left-color: #47b6ca; /* Travel through left side */
+    }
+    40% {
+        border-top-color: #ff69b4; /* Travel through top side */
+    }
+    60% {
+        border-right-color: #8a2be2; /* Travel through right side */
+    }
+    80% {
+        border-bottom-color: #ff69b4; /* Travel through bottom side */
+    }
+    100% {
+        border-color: transparent; /* End with transparent border */
+    }
+}
+
+/* Responsive styles */
+@media only screen and (max-width: 768px) {
+    .myform {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .myform {
+        width: 90%;
+    }
+}
+
+
+.register-form-label {
+    font-weight: bold;
+    color:black;
+    background-color: transparent;
+
+
+}
+
+.register-form-control {
+    background-color: rgba(255, 255, 255, 0.5); /* Set background color with higher opacity */
+    border: 1px solid transparent; /* Set border color to transparent */
+    border-radius: 5px; /* Add border radius to input */
+    padding: 8px; /* Add padding to input */
+    width: 100%; /* Set input width to 100% */
+    border: 1.5px solid black; /* Add border with black color */
+    box-sizing: border-box; /* Include padding and border in input's total width */
+    animation: light-travel 2s infinite;
+}
+
+.register-form-control::placeholder {
+    color: #458; /* Dark gray color for the placeholder text */
+}
+
+
+.register-login-links {
+    text-align: center;
+    margin-top: 20px;
+    color: black;
+}
+
+.register-login-links a {
+    color: #47b6ca;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 5px;
+    font-size: 18px;
+}
+
+.register-login-links a:hover {
+    text-decoration: underline;
+}
+
+.register-attractive-btn {
+    background-color: rgba(2, 0, 255, 0.5); /* Set translucent white background color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Add border radius */
+    padding: 10px 20px; /* Add padding to the button */
+    color: #fff; /* Set text color to white */
+    font-weight: bold; /* Set font weight to bold */
+    cursor: pointer; /* Set cursor to pointer on hover */
+    transition: background-color 0.3s; /* Add transition for smooth hover effect */
+    animation: light-travel 2s infinite;
+    border: 1px solid #ccc;
+}
+
+.register-attractive-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3); /* Set translucent white background color on hover */
+}
+
+
+
+.card-container {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping */
+    overflow-x: auto; /* Add horizontal scroll if needed */
+    gap: 20px; /* Add space between cards */
+    padding: 20px; /* Add padding */
+}
+
+.card {
+    flex: 0 0 auto; /* Prevent card from growing */
+    width: 18rem; /* Set card width */
+    /* Add any other styles you need */
+}

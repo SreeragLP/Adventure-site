@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    body {
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    height: 100vh; /* Set body height to 100% of viewport height */
+    background-image: url('{% static 'images/mou1.jpg' %}'); /* Specify the path to your GIF image */
+    background-size: cover; /* Cover the entire viewport */
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif; /* Optional: Set font family */
+}
+
+ .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    h1, .form-label {
+        color: black;
+    }
+</style>
+
+
+<div class="form-container" >
+
+<form method="POST" class="myform" data-aos="zoom-in" data-tilt >
+    <h3> <center>Login Here</h3>
+  {% csrf_token %}
+
+<div class="mb-3">
+  <label  class="form-label">Username</label>
+  <input type="text" class="form-control" name="u" placeholder="Enter username" style="transform: translateZ(20px)" >
+</div>
+
+
+<div class="mb-3">
+  <label  class="form-label">Password</label>
+  <input type="password" class="form-control" name="p" placeholder="Enter password">
+</div>
+
+    <label for="calendar">Select a date:</label>
+<input type="date" id="calendar" name="calendar">
+
+
+
+<div class="mb-3">
+  <center>
+    <input type="submit" class="attractive-btn" style="padding: 4px 70px;">
+</div>
+
+   <div style="text-align: center; margin-top: 20px; color:black;">
+            <a href="{% url 'UserAuthentication:confirm' %}">Forgot Password?</a>
+            <span style="margin: 0 10px;"> | </span>
+            <a href="{% url 'UserAuthentication:register' %}">Register</a>
+        </div>
+
+<center>
+    {% if messages %}
+
+<ul>
+  {% for msg in messages %}
+  <li>{{msg}}</li>
+  {% endfor %}
+
+</ul>
+{% endif %}
+
+  </form>
+
+
+
+
+
+
+
+{% endblock %}
