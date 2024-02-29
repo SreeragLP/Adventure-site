@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h1>this is cart view</h1>
+
+{% if not cart %}
+<div>
+    <h1>cart is empty</h1>
+</div>
+
+{% else %}
+
+<div class="row">
+    <h3 class="text-center mt-3">Package Cart</h3>
+
+
+    <div class="col-sm-6">
+        <table class="table table-bordered">
+            <tr><th colspan="5" class="text-center">Package Cart</th></tr>
+
+        {% for i in cart %}
+
+        <tr>
+            <td><img src="{{i.items.image.url}}" height="100px" width="100px"> </td>
+            <td><p><strong>name: {{i.items.name}}</strong></p></td>
+
+            <td><p><strong>price: {{i.items.price}} </strong></p></td>
+            <td><p><strong>persons: {{i.total_persons}} * {{i.items.price}}</strong></p></td>
+            <td></td><td><p><strong>{{i.subtotal}}</strong></p></td>
+
+            <td>
+                 <a href="{% url 'cart:add_to_cart' i.items.name %}"><i class="fa-solid fa-plus" style="color:red;"></i></a> <br><br>
+                <a href="{% url 'cart:cart_remove' i.items.name %}"><i class="fa-solid fa-minus" style="color:red;"></i></i></a><br><br>
+                <a href="{% url 'cart:full_remove' i.items.name %}"><i class="fa-solid fa-trash" style="color:red;"></i></i></a>
+
+            </td>
+
+<!--<td>-->
+<!--    {% if i.quantity < i.product.stock %}-->
+
+<!--                <a href=""><i class="fa-solid fa-plus" style="color:red;"></i></a> <br><br>-->
+<!--                <a href=""><i class="fa-solid fa-minus" style="color:red;"></i></i></a><br><br>-->
+<!--                <a href="}"><i class="fa-solid fa-trash" style="color:red;"></i></i></a>-->
+
+<!--    {% else %}-->
+
+<!--                <a href=""><i class="fa-solid fa-minus"></i></i></a><br>-->
+<!--                <a href=""><i class="fa-solid fa-trash"></i></i></a><br>-->
+<!--    {% endif %}-->
+
+
+<!--</td>-->
+
+
+        </tr>
+
+        {% endfor %}
+
+        </table></div>
+
+
+
+
+{% endif %}
+
+{% endblock %}
