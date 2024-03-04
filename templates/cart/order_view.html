@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<p>Name of the customer: {{ u }}</p>
+<ul>
+    {% for order in o %}
+    <li>
+        <!-- Display image -->
+
+        <img src="{{ order.package.image.url }}" style="width: 200px; height: 150px;">
+
+
+
+
+        <!-- Display address and phone number -->
+        <div>
+            <p>Address: {{ order.address }}</p>
+            <p>Phone: {{ order.phone }}</p>
+        </div>
+
+        <!-- Display package details -->
+        <p>Package: {{ order.package.name }}</p>
+        <p>Order Date: {{ order.date_added }}</p>
+        <p>Package Date: {{ order.selected_date }}</p>
+
+        <!-- Display price, number of persons, subtotal, and payment status -->
+        <p>Price: {{ order.package.price }}</p>
+        <p>Number of persons: {{ order.no_of_persons }}</p>
+        <p>Subtotal: {{ order.subtotal }}</p>
+        <p>Payment Status: {{ order.order_status }}</p>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

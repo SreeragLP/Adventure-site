@@ -3,10 +3,7 @@
 {% load static %}
 {% block content %}
 
-
-
 <div class="container">
-
     <div class="row">
         <div class="col-md-6"> <!-- Carousel on the left side -->
             <h1>Welcome to our Web page</h1>
@@ -33,18 +30,22 @@
             </div>
         </div>
         <div class="col-md-6"> <!-- Additional content on the right side -->
-            <h2>Packege Details</h2>
+            <h2>Package Details</h2>
             <p>Package name: {{ a.name }}</p>
             <p>Description: {{ a.description }}</p>
-            <p>location: {{ a.location }}</p>
-            <p>duration: {{ a.duration }}</p>
-            <p>price: {{ a.price }}</p>
+            <p>Location: {{ a.location }}</p>
+            <p>Duration: {{ a.duration }}</p>
+            <p>Price: {{ a.price }}</p>
 
-            <button>Booking</button>
-
-
-            <a href="{% url 'cart:add_to_cart' a.name %}" class="btn btn-danger mt-3">Add to Cart</a>
-
+            <!-- Add the form here -->
+            <form method="post" action="{% url 'cart:add_to_cart' a.name %}">
+                {% csrf_token %}
+                <label for="selected_date">Select a date:</label>
+                <input type="date" id="selected_date" name="selected_date" required> <!-- Date input field -->
+                <label for="total_persons">Total persons:</label>
+                <input type="number" id="total_persons" name="total_persons" min="1" value="1" required> <!-- Number input field -->
+                <button type="submit">Add to Cart</button> <!-- Submit button -->
+            </form>
         </div>
     </div>
 </div>

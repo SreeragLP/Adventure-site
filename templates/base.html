@@ -13,6 +13,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device, initial-scale=1">
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-SZXy7Tp6MMg5n+R/Xp5I2+QDrZqgKYgVftK+74V1u4eckRZBgxk4s0F7F" crossorigin="anonymous">
+
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -74,16 +78,78 @@
                         <a class="nav-link active" aria-current="page" href="{% url 'UserAuthentication:logout' %}">Logout</a>
                     </li>
                 </ul>
-                <form class="form-inline">
-                    <div class="input-group">
-                        <input class="form-control" type="search" placeholder="Search your products" aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="attractive-btn" type="submit">Search</button>
-                        </div>
-                    </div>
-                </form>
+<!--                <form class="form-inline">-->
+<!--                    <div class="input-group">-->
+<!--                        <input class="form-control" type="search" placeholder="Search your products" aria-label="Search">-->
+<!--                        <div class="input-group-append">-->
+<!--                            <button class="attractive-btn" type="submit">Search</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </form>-->
+
+                    <form class="form-inline" method="POST" action="{% url 'search:searchresult' %}">
+        {% csrf_token %}
+      <div class="input-group">
+        <input class="form-control" type="search" name="q" placeholder="Search your packages" aria-label="Search">
+        <div class="input-group-append">
+          <button class="attractive-btn" type="submit">Search</button>
+        </div>
+      </div>
+
+      </form>
+
+
             </div>
         </div>
+
+        <div>
+
+
+            <!-- Button to toggle the off-canvas menu -->
+
+            <!-- Notification icon -->
+ <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+        <i class="fas fa-bell"></i>
+    </button>
+
+    <!-- Off-canvas menu -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header bg-primary text-white">
+            <h5 id="offcanvasRightLabel">Notifications</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+    {% if links %}
+        <!-- Display notifications -->
+        <ul class="list-group list-group-flush">
+            {% for link in links %}
+                <li class="list-group-item border border-primary rounded">
+                    <!-- Display notification details -->
+                    <h5 class="mb-2">{{ link.package.name }}</h5>
+                    <p class="mb-2">Start Date: {{ link.selected_date }}</p>
+
+                     <p>Subtotal: {{ link.subtotal }}</p>
+                     <p>Payment Status: {{ link.order_status }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <!-- Display message if there are no notifications -->
+        <p>No notifications</p>
+    {% endif %}
+</div>
+
+
+        </div>
+
+
+
+
+        </div>
+
+
+
+
     </nav>
 </header>
 
@@ -91,74 +157,13 @@
 {% endblock %}
 
 <script src="{% static 'css/vanilla-tilt.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoJtKh7z7lGz7fuP4F8nfdFvAOA6Gg/z6Y5J6XqqyGXYM2ntXU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0v8FqFjcJ6pajs/rfdfs3SO+kD4Ck5BdPtF+to8xMp9Mvc" crossorigin="anonymous"></script>
 </body>
 
 <script>
   AOS.init();
 </script>
-
-
-
-<!--&lt;!&ndash; start footer Area &ndash;&gt;-->
-<!--			<footer class="footer-area section-gap">-->
-<!--				<div class="container">-->
-<!--					<div class="row">-->
-<!--						<div class="col-lg-5 col-md-6 col-sm-6">-->
-<!--							<div class="single-footer-widget">-->
-<!--								<h6>About Us</h6>-->
-<!--								<p>-->
-<!--									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.-->
-<!--								</p>-->
-<!--								&lt;!&ndash; Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. &ndash;&gt;-->
-<!--            		<p class="footer-text">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>-->
-<!--            		&lt;!&ndash; Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. &ndash;&gt;-->
-<!--							</div>-->
-<!--						</div>-->
-<!--						<div class="col-lg-5  col-md-6 col-sm-6">-->
-<!--							<div class="single-footer-widget">-->
-<!--								<h6>Newsletter</h6>-->
-<!--								<p>Stay update with our latest</p>-->
-<!--								<div class="" id="mc_embed_signup">-->
-
-<!--										<form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="form-inline">-->
-
-<!--										<div class="d-flex flex-row">-->
-
-<!--											<input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" required="" type="email">-->
-
-
-<!--				                            	<button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>-->
-<!--				                            	<div style="position: absolute; left: -5000px;">-->
-<!--													<input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">-->
-<!--												</div>-->
-
-<!--											&lt;!&ndash; <div class="col-lg-4 col-md-4">-->
-<!--												<button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button>-->
-<!--											</div>  &ndash;&gt;-->
-<!--										</div>-->
-<!--										<div class="info"></div>-->
-<!--										</form>-->
-<!--								</div>-->
-<!--								</div>-->
-<!--						</div>-->
-<!--						<div class="col-lg-2 col-md-6 col-sm-6 social-widget">-->
-<!--							<div class="single-footer-widget">-->
-<!--								<h6>Follow Us</h6>-->
-<!--								<p>Let us be social</p>-->
-<!--								<div class="footer-social d-flex align-items-center">-->
-<!--									<a href="#"><i class="fa fa-facebook"></i></a>-->
-<!--									<a href="#"><i class="fa fa-twitter"></i></a>-->
-<!--									<a href="#"><i class="fa fa-dribbble"></i></a>-->
-<!--									<a href="#"><i class="fa fa-behance"></i></a>-->
-<!--								</div>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--					</div>-->
-<!--				</div>-->
-<!--			</footer>-->
-<!--			&lt;!&ndash; End footer Area &ndash;&gt;-->
-
-
 
 
 </html>

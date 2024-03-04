@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<center>
+<div class="row">
+        {% for i in p %}
+        <div class="col-4">
+
+            <div class="card" style="width: 30rem;">
+  <img src="{{i.image.url}}" class="card-img-top" height="250px" width="100%" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{i.name}}</h5>
+
+    <p class="card-text">{{i.price}}</p>
+    <a href="" style="position:relative;left:40%;" class="btn btn-primary">Details</a>
+  </div>
+
+</div>
+        </div>
+        {% empty %}
+    <h6>0 Results found</h6>
+    <div class="image-container">
+     <img class="img1" src="{% static 'images/no.gif' %}" height="390px" width="520px">
+
+    {% endfor %}
+
+    </div>
+</div>
+
+
+
+</center>
+
+
+{% endblock %}

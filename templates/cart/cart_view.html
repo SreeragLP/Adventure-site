@@ -3,66 +3,42 @@
 {% load static %}
 {% block content %}
 
-<h1>this is cart view</h1>
+<div class="container">
+    <h2>Cart Items</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Package Name</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Total Persons</th>
+                <th>Selected Date</th>
+                <th>Subtotal</th>
+                <th>Actions</th> <!-- New column for edit and delete buttons -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+            <tr>
+                <td>{{ item.items.name }}</td>
+                <td><img src="{{ item.items.image.url }}" alt="Package Image" style="max-width: 100px;"></td>
+                <td>{{ item.items.price }}</td>
+                <td>{{ item.total_persons }}</td>
+                <td>{{ item.selected_date }}</td>
+                <td>{{ item.subtotal }}</td>
+                <td>
+                    <!-- Edit Button -->
+                    <a href="{% url 'cart:edit_cart_item' item.pk %}" class="btn btn-primary">Edit</a>
+                    <!-- Delete Button -->
+                    <a href="{% url 'cart:delete_cart_item' item.pk %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p>Total: {{ total }}</p>
 
-{% if not cart %}
-<div>
-    <h1>cart is empty</h1>
+    <a href="{% url 'cart:booking_form' %}" class="btn btn-primary">Book Now</a>
 </div>
-
-{% else %}
-
-<div class="row">
-    <h3 class="text-center mt-3">Package Cart</h3>
-
-
-    <div class="col-sm-6">
-        <table class="table table-bordered">
-            <tr><th colspan="5" class="text-center">Package Cart</th></tr>
-
-        {% for i in cart %}
-
-        <tr>
-            <td><img src="{{i.items.image.url}}" height="100px" width="100px"> </td>
-            <td><p><strong>name: {{i.items.name}}</strong></p></td>
-
-            <td><p><strong>price: {{i.items.price}} </strong></p></td>
-            <td><p><strong>persons: {{i.total_persons}} * {{i.items.price}}</strong></p></td>
-            <td></td><td><p><strong>{{i.subtotal}}</strong></p></td>
-
-            <td>
-                 <a href="{% url 'cart:add_to_cart' i.items.name %}"><i class="fa-solid fa-plus" style="color:red;"></i></a> <br><br>
-                <a href="{% url 'cart:cart_remove' i.items.name %}"><i class="fa-solid fa-minus" style="color:red;"></i></i></a><br><br>
-                <a href="{% url 'cart:full_remove' i.items.name %}"><i class="fa-solid fa-trash" style="color:red;"></i></i></a>
-
-            </td>
-
-<!--<td>-->
-<!--    {% if i.quantity < i.product.stock %}-->
-
-<!--                <a href=""><i class="fa-solid fa-plus" style="color:red;"></i></a> <br><br>-->
-<!--                <a href=""><i class="fa-solid fa-minus" style="color:red;"></i></i></a><br><br>-->
-<!--                <a href="}"><i class="fa-solid fa-trash" style="color:red;"></i></i></a>-->
-
-<!--    {% else %}-->
-
-<!--                <a href=""><i class="fa-solid fa-minus"></i></i></a><br>-->
-<!--                <a href=""><i class="fa-solid fa-trash"></i></i></a><br>-->
-<!--    {% endif %}-->
-
-
-<!--</td>-->
-
-
-        </tr>
-
-        {% endfor %}
-
-        </table></div>
-
-
-
-
-{% endif %}
 
 {% endblock %}
