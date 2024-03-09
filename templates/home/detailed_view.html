@@ -1,12 +1,59 @@
-<!DOCTYPE html>
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<style>
+    .carousel-item img {
+        height: 400px; /* Adjust carousel image height */
+    }
+
+    .package-details {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .package-details h2 {
+        color: #333;
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .package-details p {
+        color: #666;
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        padding: 10px 20px;
+        border-radius: 5px;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+</style>
 
 <div class="container">
     <div class="row">
-        <div class="col-md-6"> <!-- Carousel on the left side -->
-            <h1>Welcome to our Web page</h1>
+        <div class="col-md-6">
+            <!-- Carousel on the left side -->
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -14,9 +61,6 @@
                     </div>
                     <div class="carousel-item">
                         <img src="{{ a.image1.url }}" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{ a.image2.url }}" class="d-block w-100" alt="...">
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -29,23 +73,27 @@
                 </button>
             </div>
         </div>
-        <div class="col-md-6"> <!-- Additional content on the right side -->
-            <h2>Package Details</h2>
-            <p>Package name: {{ a.name }}</p>
-            <p>Description: {{ a.description }}</p>
-            <p>Location: {{ a.location }}</p>
-            <p>Duration: {{ a.duration }}</p>
-            <p>Price: {{ a.price }}</p>
+        <div class="col-md-6">
+            <!-- Additional content on the right side -->
+            <div class="package-details">
+                <h2>{{ a.name }}</h2>
+                <p class="description">{{ a.description }}</p>
+                <p class="price">Price: {{ a.price }}</p>
 
-            <!-- Add the form here -->
-            <form method="post" action="{% url 'cart:add_to_cart' a.name %}">
-                {% csrf_token %}
-                <label for="selected_date">Select a date:</label>
-                <input type="date" id="selected_date" name="selected_date" required> <!-- Date input field -->
-                <label for="total_persons">Total persons:</label>
-                <input type="number" id="total_persons" name="total_persons" min="1" value="1" required> <!-- Number input field -->
-                <button type="submit">Add to Cart</button> <!-- Submit button -->
-            </form>
+                <!-- Add the form here -->
+                <form method="post" action="{% url 'cart:add_to_cart' a.name %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="selected_date">Select a date:</label>
+                        <input type="date" id="selected_date" name="selected_date" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="total_persons">Total persons:</label>
+                        <input type="number" id="total_persons" name="total_persons" class="form-control" min="1" value="1" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

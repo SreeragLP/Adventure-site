@@ -27,7 +27,9 @@ urlpatterns = [
 
     path('detailed_view/<p>', views.detailed_view, name="detailed_view"),
 
-    path('rating', views.rating, name="rating"),
+    # path('rating', views.rating, name="rating"),
+    path('rating/<str:package_name>/', views.rating, name='rating'),
+
     path('thanks', views.thanks, name="thanks"),
 
     path('review', views.review, name="review"),

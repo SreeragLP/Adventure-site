@@ -7,11 +7,9 @@ class AdventurePackage(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    location = models.CharField(max_length=100)
-    duration = models.CharField(max_length=50)
     image = models.ImageField(upload_to='adventure_package_images/')
     image1 = models.ImageField(upload_to='adventure_package_images/')
-    image2 = models.ImageField(upload_to='adventure_package_images/')
+
 
 
     def __str__(self):
@@ -22,18 +20,42 @@ class AdventurePackage(models.Model):
 
 
 
+# class Rating(models.Model):
+#     RATING_CHOICES = (
+#         (1, 'Very Poor'),
+#         (2, 'Poor'),
+#         (3, 'Good'),
+#         (4, 'Very Good'),
+#         (5, 'Excellent'),
+#     )
+#
+#     rating = models.IntegerField(choices=RATING_CHOICES)
+#     feedback = models.TextField()
+#     created_at = models.DateTimeField(auto_now_add=True)
+#
+#     def __str__(self):
+#         return f'Rating: {self.rating}'
+
+
+from django.db import models
+from django.contrib.auth.models import User
+
 class Rating(models.Model):
     RATING_CHOICES = (
         (1, 'Very Poor'),
         (2, 'Poor'),
-        (3, 'Fair'),
-        (4, 'Good'),
+        (3, 'Good'),
+        (4, 'Very Good'),
         (5, 'Excellent'),
     )
 
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    package = models.ForeignKey(AdventurePackage, on_delete=models.CASCADE)
     rating = models.IntegerField(choices=RATING_CHOICES)
     feedback = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    has_rated = models.BooleanField(default=False)
 
     def __str__(self):
         return f'Rating: {self.rating}'
+

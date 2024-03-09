@@ -2,36 +2,77 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
 
-<center>
-<div class="row">
-        {% for i in p %}
-        <div class="col-4">
+        .container {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
 
-            <div class="card" style="width: 30rem;">
-  <img src="{{i.image.url}}" class="card-img-top" height="250px" width="100%" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">{{i.name}}</h5>
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
 
-    <p class="card-text">{{i.price}}</p>
-    <a href="" style="position:relative;left:40%;" class="btn btn-primary">Details</a>
-  </div>
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
 
-</div>
+        .card-img-top {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .card-body {
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            border-radius: 20px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            {% for item in p %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card">
+                    <img src="{{ item.image.url }}" class="card-img-top" height="250" alt="{{ item.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.name }}</h5>
+                        <p class="card-text">{{ item.price }}</p>
+                        <a href="#" class="btn btn-primary">Details</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col">
+                <h6>No Results Found</h6>
+                <img src="{% static 'images/no.gif' %}" class="img-fluid" alt="No Results Found">
+            </div>
+            {% endfor %}
         </div>
-        {% empty %}
-    <h6>0 Results found</h6>
-    <div class="image-container">
-     <img class="img1" src="{% static 'images/no.gif' %}" height="390px" width="520px">
-
-    {% endfor %}
-
     </div>
-</div>
-
-
-
-</center>
-
+</body>
+</html>
 
 {% endblock %}

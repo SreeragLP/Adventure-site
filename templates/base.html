@@ -62,12 +62,12 @@
                         <a class="nav-link active" aria-current="page" href="{% url 'app1:packages' %}">Packages</a>
                     </li>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">All Category</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href=""></a></li>
-                        </ul>
-                    </li>
+<!--                    <li class="nav-item dropdown">-->
+<!--                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">All Category</a>-->
+<!--                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+<!--                            <li><a class="dropdown-item" href=""></a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'UserAuthentication:register' %}">Register</a>
                     </li>
@@ -102,6 +102,19 @@
             </div>
         </div>
 
+
+                    <a class="nav-link" href="{% url 'cart:cart_view' %}">
+                        <i class="fas fa-shopping-cart"></i> <!-- Replace this with the appropriate icon class -->
+                    </a>
+
+
+
+                    <a class="nav-link" href="{% url 'app1:review' %}">
+                        <i class="fas fa-star-half-alt thank-you-icon-review"></i>
+                    </a>
+
+
+
         <div>
 
 
@@ -119,25 +132,40 @@
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body" data-aos="fade-left">
-    {% if links %}
-        <!-- Display notifications -->
-        <ul class="list-group list-group-flush">
-            {% for link in links %}
-                <li class="list-group-item border border-primary rounded">
-                    <!-- Display notification details -->
-                    <h5 class="mb-2">{{ link.package.name }}</h5>
-                    <p class="mb-2">Start Date: {{ link.selected_date }}</p>
+ {% if orders %}
+    <!-- Display notifications -->
+    <ul class="list-group list-group-flush">
+        {% for i in orders %}
+            <li class="list-group-item border border-primary rounded">
+                <!-- Display notification details -->
+                <h5 class="mb-2">{{ i.package.name }}</h5>
+                <p class="mb-2">Start Date: {{ i.selected_date }}</p>
+                <p>Subtotal: {{ i.subtotal }}</p>
+                <p>Payment Status: {{ i.order_status }}</p>
+                <!-- Conditionally display the "Rate your package" link -->
+                {% if i.is_completed %}
+                    <a class="nav-link active" aria-current="page" href="{% url 'app1:rating' package_name=i.package.name %}">Rate your {{ i.package.name }} experience</a>
+                {% endif %}
 
-                     <p>Subtotal: {{ link.subtotal }}</p>
-                     <p>Payment Status: {{ link.order_status }}</p>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <!-- Display message if there are no notifications -->
-        <p>No notifications</p>
-    {% endif %}
-</div>
+                <a class="nav-link" href="{% url 'cart:orderview' %}">
+                <i class="fas fa-shopping-cart"></i>
+                <i class="fas fa-arrow-right"></i>
+                </a>
+
+
+            </li>
+
+        {% endfor %}
+    </ul>
+{% else %}
+    <!-- Display message if there are no notifications -->
+    <p>No notifications</p>
+
+{% endif %}
+
+
+
+
 
 
         </div>

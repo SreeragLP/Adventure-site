@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Five Star Rating</title>
+    <title>Rating</title>
     <link rel="stylesheet" href="{% static 'assests/mycss/mystyle.css' %}">
     <style>
         .star {
@@ -16,10 +16,17 @@
     </style>
 </head>
 <body>
-    <form id="ratingForm"  method="POST">
+
+
+    <form id="ratingForm" method="POST">
         {% csrf_token %}
 
+
+
+
         <div class="container">
+
+<!--             <h2 style="color:white">Rating for {{ package_name }}</h2>-->
             <div class="info">
                 <div class="emoji"></div>
                 <div class="status"></div>
@@ -51,12 +58,13 @@
                     </svg>
                 </div>
             </div>
-            <div style="margin:5px">
-                <label for="textbox">Feedback:</label>
-                <textarea id="textbox" name="textbox" rows="7" cols="30"></textarea>
+            <div style="margin:10px">
+                <label for="textbox"></label>
+                <textarea id="textbox" name="textbox" rows="7" cols="30" placeholder="Rating for {{ package_name }}"></textarea>
                 <br><br>
                 <input type="submit" value="Submit">
                 <input type="hidden" id="starRating" name="starRating">
+                <input type="hidden" name="package_id" value="{{ package_id }}">
             </div>
         </div>
     </form>
