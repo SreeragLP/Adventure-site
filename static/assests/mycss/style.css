@@ -121,7 +121,7 @@ body {
     width: 400px;
     border: 4px ridge #ccc;
     border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.2); /* Adjust the alpha value for transparency */
+    background-color: rgba(255, 255, 255, 0.4); /* Adjust the alpha value for transparency */
     backdrop-filter: blur(1px); /* Adjust the blur amount as needed */
     animation: light-travel 2s infinite;
 }

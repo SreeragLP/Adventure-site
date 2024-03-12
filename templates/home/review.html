@@ -29,14 +29,21 @@
         }
 
         .review-card {
+            display: flex;
             border: 1px solid #ccc;
             border-radius: 5px;
             padding: 10px;
             margin-bottom: 20px;
         }
 
-        .review-card p {
-            margin: 5px 0;
+        .review-card-left {
+            flex: 1;
+            margin-right: 10px;
+            max-width: 130px; /* Adjust the width of the left side */
+        }
+
+        .review-card-right {
+            flex: 2; /* Adjust the width of the right side */
         }
 
         .star {
@@ -50,30 +57,46 @@
     <div class="container">
         <h1>Reviews</h1>
 
-        <div class="reviews">
+        <div class="reviews" data-aos="fade-down">
             {% for rating in ratings %}
             <div class="review-card">
-                <p><strong>{{ rating.user.username }}</strong></p>
-
-                <p><div id="starRating{{ rating.id }}"></div><strong>Package Name:</strong> {{ rating.package.name }}</p>
-                <p><strong>Rating:</strong> {{ rating.rating }}</p>
-                <p><strong>Feedback:</strong> {{ rating.feedback }}</p>
-                <div id="starRating{{ rating.id }}"></div>
-
-                <script>
-                    // Function to generate star icons based on rating
-                    function generateStars(rating) {
-                        let starsHTML = '';
-                        for (let i = 1; i <= rating; i++) {
-                            starsHTML += '<svg class="star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg>';
+                <div class="review-card-left">
+                    <p><strong>{{ rating.user.username }}</strong></p>
+                    <p>
+                        <strong>
+                            {% if rating.rating == 1 %}
+                                Very Poor
+                            {% elif rating.rating == 2 %}
+                                Poor
+                            {% elif rating.rating == 3 %}
+                                Good
+                            {% elif rating.rating == 4 %}
+                                Very Good
+                            {% elif rating.rating == 5 %}
+                                Excellent
+                            {% endif %}
+                        </strong>
+                    </p>
+                    <div id="starRating{{ rating.id }}"></div>
+                    <script>
+                        // Function to generate star icons based on rating
+                        function generateStars(rating) {
+                            let starsHTML = '';
+                            for (let i = 1; i <= rating; i++) {
+                                starsHTML += '<svg class="star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg>';
+                            }
+                            return starsHTML;
                         }
-                        return starsHTML;
-                    }
 
-                    // Display the star icons based on rating
-                    const rating{{ rating.id }} = {{ rating.rating }};
-                    document.getElementById('starRating{{ rating.id }}').innerHTML = generateStars(rating{{ rating.id }});
-                </script>
+                        // Display the star icons based on rating
+                        const rating{{ rating.id }} = {{ rating.rating }};
+                        document.getElementById('starRating{{ rating.id }}').innerHTML = generateStars(rating{{ rating.id }});
+                    </script>
+                </div>
+                <div class="review-card-right">
+                    <p><strong>Package Name:</strong> {{ rating.package.name }}</p>
+                    <p><strong>Feedback:</strong> {{ rating.feedback }}</p>
+                </div>
             </div>
             {% endfor %}
         </div>

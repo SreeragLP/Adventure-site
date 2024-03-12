@@ -3,7 +3,7 @@
 {% block content %}
 <style>
     .carousel-item img {
-        height: 400px; /* Adjust carousel image height */
+        height: 585px; /* Adjust carousel image height */
     }
 
     .package-details {
@@ -51,41 +51,42 @@
 </style>
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-6">
+    <div class="row" >
+        <div class="col-md-6" data-aos="zoom-in">
             <!-- Carousel on the left side -->
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img src="{{ a.image.url }}" class="d-block w-100" alt="...">
                     </div>
-                    <div class="carousel-item">
-                        <img src="{{ a.image1.url }}" class="d-block w-100" alt="...">
-                    </div>
+<!--                    <div class="carousel-item">-->
+<!--                        <img src="{{ a.image1.url }}" class="d-block w-100" alt="...">-->
+<!--                    </div>-->
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
+<!--                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">-->
+<!--                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+<!--                    <span class="visually-hidden">Previous</span>-->
+<!--                </button>-->
                 <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" data-aos="fade-left">
             <!-- Additional content on the right side -->
             <div class="package-details">
                 <h2>{{ a.name }}</h2>
-                <p class="description">{{ a.description }}</p>
-                <p class="price">Price: {{ a.price }}</p>
+                <p class="description">{{ a.description }}</p> <br>
+                <p class="price">Price: {{ a.price }}</p> <br>
 
                 <!-- Add the form here -->
                 <form method="post" action="{% url 'cart:add_to_cart' a.name %}">
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="selected_date">Select a date:</label>
-                        <input type="date" id="selected_date" name="selected_date" class="form-control" required>
+                        <input type="date" id="selected_date" name="selected_date"  class="form-control" min="{% now 'Y-m-d' %}" required >
+
                     </div>
                     <div class="form-group">
                         <label for="total_persons">Total persons:</label>

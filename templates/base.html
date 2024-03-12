@@ -47,8 +47,8 @@
 
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mt-1">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mt-1" >
+        <div class="container-fluid" >
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -126,49 +126,55 @@
     </button>
 
     <!-- Off-canvas menu -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header bg-primary text-white">
-            <h5 id="offcanvasRightLabel">Notifications</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body" data-aos="fade-left">
- {% if orders %}
-    <!-- Display notifications -->
-    <ul class="list-group list-group-flush">
-        {% for i in orders %}
-            <li class="list-group-item border border-primary rounded">
-                <!-- Display notification details -->
-                <h5 class="mb-2">{{ i.package.name }}</h5>
-                <p class="mb-2">Start Date: {{ i.selected_date }}</p>
-                <p>Subtotal: {{ i.subtotal }}</p>
-                <p>Payment Status: {{ i.order_status }}</p>
-                <!-- Conditionally display the "Rate your package" link -->
-                {% if i.is_completed %}
-                    <a class="nav-link active" aria-current="page" href="{% url 'app1:rating' package_name=i.package.name %}">Rate your {{ i.package.name }} experience</a>
-                {% endif %}
+ <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" >
+    <div class="offcanvas-header bg-primary text-white" >
+        <h5 id="offcanvasRightLabel">Notifications</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body" >
+        {% if orders %}
+            <!-- Display notifications -->
+            <ul class="list-group list-group-flush"  >
+                {% for i in orders %}
+                    <li class="list-group-item border border-primary rounded" >
+                        <!-- Display notification details -->
+                        <h5 class="mb-2">{{ i.package.name }}</h5>
+                        <p class="mb-2">Start Date: {{ i.selected_date }}</p>
+                        <p>Subtotal: {{ i.subtotal }}</p>
+                        <p>Payment Status: {{ i.order_status }}</p>
+                        <!-- Conditionally display the "Rate your package" link -->
+                        {% if i.is_completed %}
+                            {% if i.user_has_rated %}
+                                 <i class="fas fa-check-circle" style="color:green;"></i>
+                        <span  style="color:green;">You have already rated this package.</span>
 
-                <a class="nav-link" href="{% url 'cart:orderview' %}">
-                <i class="fas fa-shopping-cart"></i>
-                <i class="fas fa-arrow-right"></i>
-                </a>
+                            {% else %}
+                                <i class="fas fa-star" style="color:#FFD700;"></i>
+                                <span ><a href="{% url 'app1:rating' package_name=i.package.name %}"
+                                style="color:blue; text-decoration:none;">
+                                    Rate your {{ i.package.name }} experience</a></span>
+                            {% endif %}
+                        {% else %}
+                            <i class="fas fa-clock" style="color:red;"></i>
+                            <span style="color:red;">Package completion pending.</span>
+                        {% endif %}
 
+                        <br><br>
+                        <a class="nav-link" href="{% url 'cart:orderview' %}"  style="display: flex; justify-content: flex-end;">
+                            <i class="fas fa-shopping-cart"></i>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <!-- Display message if there are no notifications -->
+            <p>No notifications</p>
+        {% endif %}
+    </div>
+</div>
 
-            </li>
-
-        {% endfor %}
-    </ul>
-{% else %}
-    <!-- Display message if there are no notifications -->
-    <p>No notifications</p>
-
-{% endif %}
-
-
-
-
-
-
-        </div>
+</div>
 
 
 

@@ -60,7 +60,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ item.name }}</h5>
                         <p class="card-text">{{ item.price }}</p>
-                        <a href="#" class="btn btn-primary">Details</a>
+                        <a href="{% url 'app1:detailed_view' item.name %}" class="btn btn-primary">Details</a>
                     </div>
                 </div>
             </div>

@@ -5,77 +5,117 @@
 
 <style>
     body {
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
-    height: 100vh; /* Set body height to 100% of viewport height */
-    background-image: url('{% static 'images/mou1.jpg' %}'); /* Specify the path to your GIF image */
-    background-size: cover; /* Cover the entire viewport */
-    background-position: center;
-    background-repeat: no-repeat;
-    font-family: Arial, sans-serif; /* Optional: Set font family */
-}
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        background-image: url('{% static 'images/mou1.jpg' %}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        font-family: Arial, sans-serif;
+    }
 
- .form-container {
+    .login-form-container {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100%;
     }
 
-    h1, .form-label {
+    .login-title, .login-label {
         color: black;
+        text-align: center;
+    }
+
+    .login-form {
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+        max-width: 400px;
+        width: 100%;
+    }
+
+    .login-form-group {
+        margin-bottom: 20px;
+    }
+
+    .login-input {
+        width: calc(100% - 20px);
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .login-btn {
+        background-color: #007bff;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .login-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .login-link {
+        color: #007bff;
+        text-decoration: none;
+        font-size: 18px; font-weight: bold;
+
+    }
+
+    .login-link:hover {
+        text-decoration: underline;
+    }
+
+    .login-message {
+        color: red;
+        text-align: center;
     }
 </style>
 
+<div class="login-form-container">
+    <form method="POST" class="login-form" data-aos="zoom-in" data-tilt>
+        <h3 class="login-title">Login Here</h3>
+        {% csrf_token %}
 
-<div class="form-container" >
-
-<form method="POST" class="myform" data-aos="zoom-in" data-tilt >
-    <h3> <center>Login Here</h3>
-  {% csrf_token %}
-
-<div class="mb-3">
-  <label  class="form-label">Username</label>
-  <input type="text" class="form-control" name="u" placeholder="Enter username" style="transform: translateZ(20px)" >
-</div>
-
-
-<div class="mb-3">
-  <label  class="form-label">Password</label>
-  <input type="password" class="form-control" name="p" placeholder="Enter password">
-</div>
-
-
-<div class="mb-3">
-  <center>
-    <input type="submit" class="attractive-btn" style="padding: 4px 70px;">
-</div>
-
-   <div style="text-align: center; margin-top: 20px; color:black;">
-            <a href="{% url 'UserAuthentication:confirm' %}">Forgot Password?</a>
-            <span style="margin: 0 10px;"> | </span>
-            <a href="{% url 'UserAuthentication:register' %}">Register</a>
-
-       <img src="{% static 'images/king.gif' %}" alt="" style="max-height: 115px;>
+        <div class="login-form-group">
+            <label class="login-label"><strong>Username</strong></label>
+            <input type="text" class="login-input" name="u" placeholder="Enter username">
         </div>
 
-<center>
-    {% if messages %}
+        <div class="login-form-group">
+            <label class="login-label"><strong>Password</strong></label>
+            <input type="password" class="login-input" name="p" placeholder="Enter password">
+        </div>
 
-<ul>
-  {% for msg in messages %}
-  <li>{{msg}}</li>
-  {% endfor %}
+        <div class="login-form-group">
+            <center>
+                <input type="submit" class="login-btn" value="Login">
+        </div>
 
-</ul>
-{% endif %}
+        <div class="login-form-group">
+            <center>
+                <a href="{% url 'UserAuthentication:confirm' %}" class="login-link">Forgot Password?</a>
+                <span style="margin: 0 10px;"> | </span>
+                <a href="{% url 'UserAuthentication:register' %}" class="login-link">Register</a>
+            </center>
+        </div>
 
-  </form>
-
-
-
-
-
-
+        <div class="login-message">
+            {% if messages %}
+            <ul>
+                {% for msg in messages %}
+                <li>{{ msg }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </form>
+</div>
 
 {% endblock %}

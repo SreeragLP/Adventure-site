@@ -8,9 +8,13 @@
     <form method="post">
         {% csrf_token %}
         <label for="total_persons">Total Persons:</label>
-        <input type="number" id="total_persons" name="total_persons" value="{{ cart_item.total_persons }}" required>
+<!--        <input type="number" id="total_persons" name="total_persons" value="{{ cart_item.total_persons }}" required>-->
+
+        <input type="number" id="total_persons" name="total_persons" value="{{ cart_item.total_persons }}"
+        min="1" required>
         <label for="selected_date">Selected Date:</label>
-        <input type="date" id="selected_date" name="selected_date" value="{{ cart_item.selected_date }}" required>
+        <input type="date" id="selected_date" name="selected_date" value="{{ cart_item.selected_date }}"
+               min="{% now 'Y-m-d' %}" required>
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
 </div>
