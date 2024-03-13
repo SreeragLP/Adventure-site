@@ -28,9 +28,12 @@
                 <td>{{ item.subtotal }}</td>
                 <td>
                     <!-- Edit Button -->
-                    <a href="{% url 'cart:edit_cart_item' item.pk %}" class="btn btn-primary">Edit</a>
+                    <span>
+
+                    <a href="{% url 'cart:edit_cart_item' item.pk %}"><i class="fas fa-edit"></i></a>     .
                     <!-- Delete Button -->
-                    <a href="{% url 'cart:delete_cart_item' item.pk %}" class="btn btn-danger">Delete</a>
+                    <a href="{% url 'cart:delete_cart_item' item.pk %}" ><i class="fas fa-trash-alt"></i>
+</a>
                 </td>
             </tr>
             {% endfor %}
