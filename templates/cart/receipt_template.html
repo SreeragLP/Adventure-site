@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<div class="container">
+    <h1 class="mt-4 mb-3">Your Order Details </h1>
+    <div class="row">
+        {% for order in o %}
+        <div class="col-md-4">
+            <div class="mb-4">
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetails{{ order.id }}" aria-expanded="false" aria-controls="collapseDetails{{ order.id }}">
+
+                    <div class="row">
+    <div class="col-md-4">
+        <!-- Image on the left side -->
+        <img src="{{ order.package.image.url }}" class="img-fluid rounded-start" alt="Package Image" style="max-height: 115px;">
+    </div>
+    <div class="col-md-8">
+        <!-- Other details on the right side -->
+        <div style="text-align:left">
+            <p><strong>Package: </strong>{{ order.package.name }}</p>
+            <!-- Other details displayed inline -->
+            <h6>{{ order.no_of_persons }} × {{ order.package.price }},</h6>
+            <p> {{ order.selected_date }}</p>
+            <!-- Add more details here if needed -->
+        </div>
+    </div>
+</div>
+
+
+
+
+                </button>
+                <div class="collapse" id="collapseDetails{{ order.id }}">
+                    <div class="card card-body">
+
+                        <p><strong>Order Date:</strong> {{ order.date_added }}</p>
+
+
+
+                        <p><strong>Subtotal:</strong> {{ order.subtotal }}</p>
+                        <p><strong>Payment Status:</strong> {{ order.order_status }}</p>
+                        <hr>
+                        <p><strong>Name:</strong> {{ u }}</p>
+                        <p><strong>Address:</strong> {{ order.address }}</p>
+                        <p><strong>Phone:</strong> {{ order.phone }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</html>
