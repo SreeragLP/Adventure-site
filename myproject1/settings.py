@@ -53,6 +53,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
+LOGIN_URL="UserAuthentication:login"
+
 ROOT_URLCONF = 'myproject1.urls'
 
 TEMPLATES = [
@@ -153,7 +156,8 @@ JAZZMIN_SETTINGS = {
     "site_brand": "Rishi Cost",
 
     # Logo to use for your site, must be present in static files, used for brand on top left
-    "site_logo": "books/img/logo.png",
+    # "site_logo": "books/img/logo.png",
+    "site_logo": "books/img/1.jpg",
 
     # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
     "login_logo": None,

@@ -1,13 +1,54 @@
 from django.shortcuts import render,redirect
-from .models import AdventurePackage,Rating
+from .models import AdventurePackage,Rating,YourResponse
 
 
 
 # Create your views here.
 
 
+# def home(request):
+#
+#     if request.method == "POST":
+#         name = request.POST['name']
+#         email = request.POST['email']
+#         subject = request.POST['subject']
+#         message = request.POST['message']
+#
+#         your_response = YourResponse.objects.create(name=name, email=email, subject=subject,
+#                                            message=message)
+#
+#         your_response.save()
+#     else:
+#         pass
+#
+#
+#
+#     return render(request,'home/home.html')
+
+
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import ensure_csrf_cookie
+from .models import YourResponse
+
+@ensure_csrf_cookie
 def home(request):
-    return render(request,'home/home.html')
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        your_response = YourResponse.objects.create(name=name, email=email, subject=subject, message=message)
+        your_response.save()
+
+        # Return JSON response indicating success
+        return JsonResponse({'success': True})
+    else:
+        return render(request, 'home/home.html')
+
+
+
 
 def packages(request):
     all_packages = AdventurePackage.objects.all()

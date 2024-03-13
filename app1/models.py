@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -37,8 +38,7 @@ class AdventurePackage(models.Model):
 #         return f'Rating: {self.rating}'
 
 
-from django.db import models
-from django.contrib.auth.models import User
+
 
 class Rating(models.Model):
     RATING_CHOICES = (
@@ -59,3 +59,14 @@ class Rating(models.Model):
     def __str__(self):
         return f'Rating: {self.rating}'
 
+
+
+
+class YourResponse(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+
+    def __str__(self):
+        return self.subject
