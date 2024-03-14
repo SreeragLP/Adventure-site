@@ -34,6 +34,8 @@ urlpatterns = [
 
     path('review', views.review, name="review"),
 
+    path('about', views.about, name="about"),
+
 
 
 

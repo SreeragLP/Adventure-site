@@ -9,6 +9,11 @@ body {
     padding-bottom: 70px;
 }
 
+.navbar {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 4.1); /* Adjust values as needed */
+    }
+
+
 .myform {
     width: 90%; /* Adjust width for responsiveness */
     max-width: 400px; /* Limit maximum width */

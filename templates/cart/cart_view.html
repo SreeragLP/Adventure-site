@@ -2,46 +2,70 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
-<div class="container" >
-    <h2>Cart Items</h2>
-    <table class="table" data-aos="fade-left">
-        <thead>
-            <tr>
-                <th>Package Name</th>
-                <th>Image</th>
-                <th>Price</th>
-                <th>Total Persons</th>
-                <th>Selected Date</th>
-                <th>Subtotal</th>
-                <th>Actions</th> <!-- New column for edit and delete buttons -->
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in cart_items %}
-            <tr>
-                <td>{{ item.items.name }}</td>
-                <td><img src="{{ item.items.image.url }}" alt="Package Image" style="max-width: 100px;"></td>
-                <td>{{ item.items.price }}</td>
-                <td>{{ item.total_persons }}</td>
-                <td>{{ item.selected_date }}</td>
-                <td>{{ item.subtotal }}</td>
-                <td>
-                    <!-- Edit Button -->
-                    <span>
-
-                    <a href="{% url 'cart:edit_cart_item' item.pk %}"><i class="fas fa-edit"></i></a>     .
-                    <!-- Delete Button -->
-                    <a href="{% url 'cart:delete_cart_item' item.pk %}" ><i class="fas fa-trash-alt"></i>
-</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <p>Total: {{ total }}</p>
-
-    <a href="{% url 'cart:booking_form' %}" class="btn btn-primary">Book Now</a>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center mb-4">Your Booking Cart</h1>
+        </div>
+    </div>
+    {% if not cart_items %}
+    <div class="row">
+        <div class="col">
+            <div class="text-center empty-cart">
+                <h2>Your Cart Is Empty</h2>
+                <p>Looks like your cart is empty right now. Don't worry, we have a wide selection of amazing adventure packages waiting for you.</p>
+                <a href="{% url 'app1:packages' %}" class="btn btn-primary">Start Booking</a>
+                <div class="row mt-5">
+                    <div class="col text-center">
+                        <img src="{% static 'images/rc.png' %}" height="175px" width="165px">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="row">
+        <div class="col">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Package Name</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Total Persons</th>
+                        <th scope="col">Selected Date</th>
+                        <th scope="col">Subtotal</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                    <tr>
+                        <td>{{ item.items.name }}</td>
+                        <td><img src="{{ item.items.image.url }}" alt="Package Image" style="max-width: 100px;"></td>
+                        <td>{{ item.items.price }}</td>
+                        <td>{{ item.total_persons }}</td>
+                        <td>{{ item.selected_date }}</td>
+                        <td>{{ item.subtotal }}</td>
+                        <td>
+                            <a href="{% url 'cart:edit_cart_item' item.pk %}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> Edit</a>
+                            <a href="{% url 'cart:delete_cart_item' item.pk %}" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p class="font-weight-bold text-right">Total: {{ total }}</p>
+            <div class="text-center">
+                <a href="{% url 'cart:booking_form' %}" class="btn btn-primary btn-lg">Proceed to Checkout</a>
+                <div class="row mt-5">
+                    <div class="col text-center">
+                        <img src="{% static 'images/rc.png' %}" height="175px" width="165px">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 </div>
-
 {% endblock %}

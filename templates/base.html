@@ -48,13 +48,27 @@
 
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mt-1" >
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mt-1" style=" box-shadow: 0 2px 4px rgba(0, 0, 0, 4.1);" >
         <div class="container-fluid" >
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
+
+
+                     <li class="nav-item">
+                         <img src="{% static 'images/rc.png' %}" alt="Your Logo" width="50" height="50">
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'app1:about' %}">About Us</a>
+                    </li>
+
+
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'app1:home' %}">Home</a>
                     </li>
@@ -112,11 +126,11 @@
                         {% if user.is_authenticated %}
 
 
-                    <a><i class="fas fa-user" style="color: blue;"> </i> {{ user.first_name }}</a>
+                    <a><i class="fas fa-user" style="color: #6f42c1;"> </i> {{ user.first_name }}</a>
 
 
                     <a class="nav-link" href="{% url 'cart:cart_view' %}">
-                        <i class="fas fa-shopping-cart"></i> <!-- Replace this with the appropriate icon class -->
+                        <i class="fas fa-shopping-cart" style="color: #6f42c1;"></i> <!-- Replace this with the appropriate icon class -->
                     </a>
                         {% endif %}
 
@@ -173,14 +187,17 @@
             <!-- Button to toggle the off-canvas menu -->
 
             <!-- Notification icon -->
- <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+ <button style="color:#6f42c1;border-radius: 50%; width: 40px; height: 40px; border: 2px solid #6f42c1;"
+         type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+         aria-controls="offcanvasRight" >
         <i class="fas fa-bell"></i>
     </button>
 
     <!-- Off-canvas menu -->
  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" >
-    <div class="offcanvas-header bg-primary text-white" >
-        <h5 id="offcanvasRightLabel">Notifications</h5>
+    <div class="offcanvas-header bg-info text-white" >
+
+        <h5 id="offcanvasRightLabel" >Notifications</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body" >
@@ -213,8 +230,9 @@
 
                         <br><br>
                         <a class="nav-link" href="{% url 'cart:orderview' %}"  style="display: flex; justify-content: flex-end;">
-                            <i class="fas fa-shopping-cart"></i>
-                            <i class="fas fa-arrow-right"></i>
+
+                             <i class="fas fa-receipt" style="font-size: 17px; color: #6f42c1;"></i>
+                            <i class="fas fa-arrow-right" style="font-size: 17px; color: #6f42c1;"></i>
                         </a>
                     </li>
                 {% endfor %}

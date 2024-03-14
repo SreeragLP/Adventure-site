@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<style>
+    /* Custom styles for the about us page */
+    .about-container {
+        margin-top: 50px;
+        padding: 50px;
+        background-color: #f9f9f9; /* Light gray background */
+        border-radius: 20px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-title {
+        color: #333; /* Dark text color */
+        font-size: 36px;
+        font-weight: bold;
+        margin-bottom: 30px;
+        text-align: center;
+        text-transform: uppercase;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Text shadow for depth */
+    }
+
+    .about-content {
+        color: #666; /* Medium gray text color */
+        font-size: 18px;
+        line-height: 1.6;
+        text-align: justify;
+    }
+
+    .about-highlights {
+        margin-top: 50px;
+    }
+
+    .highlight-item {
+        margin-bottom: 30px;
+        text-align: center;
+        transition: transform 0.3s ease-in-out; /* Smooth hover effect */
+        animation: fadeInUp 1s ease-out; /* Fade in animation */
+    }
+
+    .highlight-item img {
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Soft shadow for images */
+        width: 100%; /* Ensure all images have the same width */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .highlight-item p {
+        margin-top: 10px;
+    }
+
+    .highlight-item:hover {
+        transform: scale(1.05); /* Enlarge on hover */
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2 about-container">
+            <h1 class="about-title">Journey into the Realm of Adventure</h1>
+            <div class="about-content">
+                <p>Rishi Cost Adventures, located in Rishikesh, India, is your ultimate destination for thrilling adventure experiences amidst the breathtaking natural beauty of the Himalayas.</p>
+                <p>We specialize in providing a wide range of adventure activities, including cliff jumping, cycling tours, yoga retreats, river rafting, and much more. With our team of experienced guides and top-notch equipment, we ensure a safe and unforgettable adventure for every visitor.</p>
+                <p>At Rishi Cost Adventures, we believe in pushing boundaries, exploring new horizons, and embracing the spirit of adventure. Whether you're seeking an adrenaline rush or a peaceful escape into nature, we have the perfect adventure for you.</p>
+            </div>
+            <div class="about-highlights">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="highlight-item">
+                            <img src="{% static 'images/bun.jpg' %}" alt="Cliff Jumping" class="img-fluid">
+                            <p>Bungee Jumping</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="highlight-item">
+                            <img src="{% static 'images/mo1.avif' %}" alt="Cycling Tours" class="img-fluid">
+                            <p>Cycling Tours</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="highlight-item">
+                            <img src="{% static 'images/yoga.jpg' %}" alt="Yoga Retreats" class="img-fluid">
+                            <p>Yoga Retreats</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
