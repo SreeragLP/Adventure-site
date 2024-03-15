@@ -74,7 +74,7 @@
 <center>
     <h1>Booking Form</h1>
     <p>Total Amount: {{ total_amount }}</p>
-    <form method="post" class="booking-form register-myform" data-aos="zoom-in" data-tilt>
+    <form method="post" class="booking-form register-myform" data-aos="zoom-in" >
         {% csrf_token %}
         <label for="address">Address:</label>
         <input type="text" id="address" name="address" required><br>

@@ -2,44 +2,70 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<style>
+    /* Custom CSS for button color and image size */
+    .btn-custom {
+        background-color: grey; /* Change button color */
+        border-color: yellow; /* Change button border color */
+        color: black; /* Change button text color to white */
+        width: 70%; /* Ensure full width for buttons */
+        margin-bottom: 10px; /* Add spacing between buttons */
+    }
+
+    .img-custom {
+        height: 100px; /* Set fixed height for images */
+        width: 100%; /* Ensure uniform sizing */
+        object-fit: cover; /* Maintain aspect ratio */
+        border-radius: 5px; /* Add rounded corners to images */
+    }
+
+    .dropdown-box {
+        width: calc(72% - 10px); /* Set dropdown box width to match top box */
+        /* Subtracting 10px for padding and border width */
+        background-color: #E7D192; /* Change background color to green */
+    }
+
+    /* CSS animations for hover effects */
+    .btn-custom:hover {
+        background-color: #E7D192;; /* Change button color on hover */
+        border-color: orange; /* Change button border color on hover */
+        transition: background-color 1.3s ease, border-color 0.3s ease; /* Smooth transition */
+    }
+
+    .img-custom:hover {
+        transform: scale(1.05); /* Scale image on hover */
+        transition: transform 0.3s ease; /* Smooth transition */
+    }
+</style>
 
 <div class="container">
-    <h1 class="mt-4 mb-3">Your Order Details </h1>
+    <h1 class="mt-4 mb-3">Your Order Details</h1>
     <div class="row">
         {% for order in o %}
         <div class="col-md-4">
             <div class="mb-4">
-                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetails{{ order.id }}" aria-expanded="false" aria-controls="collapseDetails{{ order.id }}">
-
+                <button class="btn btn-custom" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetails{{ order.id }}" aria-expanded="false" aria-controls="collapseDetails{{ order.id }}">
                     <div class="row">
-    <div class="col-md-4">
-        <!-- Image on the left side -->
-        <img src="{{ order.package.image.url }}" class="img-fluid rounded-start" alt="Package Image" style="max-height: 115px;">
-    </div>
-    <div class="col-md-8">
-        <!-- Other details on the right side -->
-        <div style="text-align:left">
-            <p><strong>Package: </strong>{{ order.package.name }}</p>
-            <!-- Other details displayed inline -->
-            <h6>{{ order.no_of_persons }} × {{ order.package.price }},</h6>
-            <p> {{ order.selected_date }}</p>
-            <!-- Add more details here if needed -->
-        </div>
-    </div>
-</div>
-
-
-
-
+                        <div class="col-md-12">
+                            <img src="{{ order.package.image.url }}" class="img-fluid img-custom rounded-start" alt="Package Image">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div style="text-align: left;">
+                                <p><strong>Package:</strong> {{ order.package.name }}</p>
+                                <h6>{{ order.no_of_persons }} × ${{ order.package.price }}</h6>
+                                <p>{{ order.selected_date }}</p>
+                            </div>
+                        </div>
+                    </div>
                 </button>
                 <div class="collapse" id="collapseDetails{{ order.id }}">
-                    <div class="card card-body">
-
+                    <div class="card card-body dropdown-box">
                         <p><strong>Order Date:</strong> {{ order.date_added }}</p>
-
-
-
-                        <p><strong>Subtotal:</strong> {{ order.subtotal }}</p>
+                        <p><strong>Subtotal:</strong> ${{ order.subtotal }}</p>
                         <p><strong>Payment Status:</strong> {{ order.order_status }}</p>
                         <hr>
                         <p><strong>Name:</strong> {{ u }}</p>
@@ -52,5 +78,12 @@
         {% endfor %}
     </div>
 </div>
+
+<script>
+    // Add Font Awesome icons for collapsible buttons
+    document.querySelectorAll('.btn-custom').forEach(button => {
+        button.innerHTML += '<i class="fas fa-angle-down ms-2"></i>';
+    });
+</script>
 
 {% endblock %}

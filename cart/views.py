@@ -218,7 +218,7 @@ def show_booking_form(request):
             # Send receipt email
             send_receipt_email(request, order)
 
-            msg = 'Order placed successfully'
+            msg = 'Booking successfully placed'
             return render(request, 'cart/order_confirm.html', {'msg': msg})
         else:
             msg = "Insufficient balance. Please recharge your account."

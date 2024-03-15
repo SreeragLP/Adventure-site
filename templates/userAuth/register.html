@@ -14,12 +14,13 @@
     font-family: Arial, sans-serif; /* Optional: Set font family */
 }
 </style>
-<body></body>
+<body>
+
 
 <center>
     <div class="register-form-container">
         <div class="form-container">
-            <form method="POST" class="register-myform" onsubmit="showSuccessAlert()" data-aos="zoom-in" data-tilt>
+            <form method="POST" class="register-myform" onsubmit="showSuccessAlert()" data-aos="zoom-in" >
                 <center><h3>Register here</h3></center>
                 {% csrf_token %}
 
@@ -75,5 +76,8 @@
         </div>
     </div>
 </center>
+
+
+</body>
 
 {% endblock %}

@@ -30,6 +30,8 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: 0.3s;
             width: 18rem; /* Adjust the width of the cards */
+            transform-style: preserve-3d; /* Add preserve-3d */
+            transform: perspective(10000px); /* Add perspective */
         }
 
         .card:hover {
@@ -39,23 +41,25 @@
         .card-img-top {
             border-top-left-radius: 8px;
             border-top-right-radius: 8px;
-            height: 250px; /* Set a fixed height for all card images */
+            height: 220px; /* Set a fixed height for all card images */
             object-fit: cover; /* Ensure the images cover the entire area */
+            transform: translateZ(20px); /* Add translateZ for pop-out effect */
         }
 
         .card-body {
             text-align: center;
+            transform: translateZ(20px); /* Add translateZ for pop-out effect */
         }
 
         .btn-primary {
-            background-color: #007bff;
+            background-color: #6f42c1;
             border-color: #007bff;
             border-radius: 20px;
         }
 
         .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
+            background-color: #6f42c1;
+            border-color: #6f42c1;
         }
     </style>
 </head>
@@ -63,7 +67,7 @@
     <div class="container" data-aos="fade-right">
         <div class="card-container">
             {% for package in packages %}
-                <div class="card">
+                <div class="card" data-tilt>
                     <img src="{{ package.image.url }}" class="card-img-top" alt="{{ package.name }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ package.name }}</h5>
@@ -74,6 +78,14 @@
             {% endfor %}
         </div>
     </div>
+
+    <!-- Include Tilt.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
+
+    <!-- Initialize Tilt.js for all cards -->
+    <script>
+        $('.card').tilt();
+    </script>
 </body>
 </html>
 

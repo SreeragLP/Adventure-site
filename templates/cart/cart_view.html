@@ -16,7 +16,7 @@
                 <p>Looks like your cart is empty right now. Don't worry, we have a wide selection of amazing adventure packages waiting for you.</p>
                 <a href="{% url 'app1:packages' %}" class="btn btn-primary">Start Booking</a>
                 <div class="row mt-5">
-                    <div class="col text-center">
+                    <div class="col text-center" data-tilt data-tilt-reset="false">
                         <img src="{% static 'images/rc.png' %}" height="175px" width="165px">
                     </div>
                 </div>
@@ -59,7 +59,7 @@
             <div class="text-center">
                 <a href="{% url 'cart:booking_form' %}" class="btn btn-primary btn-lg">Proceed to Checkout</a>
                 <div class="row mt-5">
-                    <div class="col text-center">
+                    <div class="col text-center" data-tilt data-tilt-reset="false">
                         <img src="{% static 'images/rc.png' %}" height="175px" width="165px">
                     </div>
                 </div>

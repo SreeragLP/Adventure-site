@@ -2,19 +2,25 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
-
-<div class="container">
-     <h3 class="text-center text-success">{{msg}}</h3>
-     <h3 class="text-center text-success">Thank you</h3>
-     <p class="text-center"><a href="{% url 'app1:packages' %}"> continue shopping</p>
-
-     <p class="text-center"><a href="{% url 'cart:booking_form' %}"> Back to payment</p>
-
-
-
-
+<div class="container-fluid bg-dark py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="text-center text-white">
+                <h2 class="display-4 mb-3" style="color:white;">{{ msg }}</h2>
+                <h3 class="display-5 mb-4" style="color:white;">Thank you</h3>
+                {% if msg == 'Booking successfully placed' %}
+                <p class="lead mb-4">
+                    Your adventure has been booked successfully. Keep exploring for more thrilling experiences!
+                </p>
+                <a href="{% url 'app1:packages' %}" class="btn btn-success btn-lg">Continue Exploring</a>
+                {% else %}
+                <p class="lead mb-4">
+                    Oops! It seems there was an issue with your booking. Please go back to payment to try again.
+                </p>
+                <a href="{% url 'cart:booking_form' %}" class="btn btn-danger btn-lg">Go Back to Payment</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </div>
-
-
 {% endblock %}
