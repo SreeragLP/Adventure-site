@@ -1,15 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import AdventurePackage, Cart,Order, Account
 from django.contrib.auth.decorators import login_required
-
 from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.core.mail import EmailMessage
-
 from io import BytesIO
 from xhtml2pdf import pisa
-
-
 
 
 def add_to_cart(request, p):
@@ -128,6 +124,55 @@ def delete_cart_item(request, pk):
 
 
 
+# def show_booking_form(request):
+#     user = request.user
+#     cart_items = Cart.objects.filter(user=user)
+#     total = 0
+#     order = None  # Initialize order variable
+#
+#     for item in cart_items:
+#         item.subtotal = item.total_persons * item.items.price
+#         total += item.subtotal
+#
+#     if request.method == "POST":
+#         address = request.POST.get('address')
+#         phone_number = request.POST.get('phone_number')
+#         account_number = request.POST.get('number')
+#
+#         acct = Account.objects.get(accnumber=account_number)
+#
+#         # Check if the user has enough balance to proceed with the order
+#         if acct.balance >= total:
+#             # Process the order
+#             for item in cart_items:
+#                 order = Order.objects.create(
+#                     user=user,
+#                     package=item.items,
+#                     no_of_persons=item.total_persons,
+#                     address=address,
+#                     phone=phone_number,
+#                     order_status="paid",
+#                     selected_date=item.selected_date
+#                 )
+#             # Clear the cart
+#             cart_items.delete()
+#             # Deduct the total amount from the user's account balance
+#             acct.balance -= total
+#             acct.save()
+#
+#             # Send receipt email
+#             send_receipt_email(request, order)
+#
+#             msg = 'Order placed successfully'
+#             return render(request, 'cart/order_confirm.html', {'msg': msg})
+#         else:
+#             msg = "Insufficient balance. Please recharge your account."
+#             return render(request, 'cart/order_confirm.html', {'msg': msg})
+#
+#     return render(request, 'cart/booking_form.html', {'total_amount': total})
+#
+#
+
 def show_booking_form(request):
     user = request.user
     cart_items = Cart.objects.filter(user=user)
@@ -143,7 +188,13 @@ def show_booking_form(request):
         phone_number = request.POST.get('phone_number')
         account_number = request.POST.get('number')
 
-        acct = Account.objects.get(accnumber=account_number)
+        try:
+            # Attempt to retrieve the account information
+            acct = Account.objects.get(accnumber=account_number)
+        except Account.DoesNotExist:
+            # If the account doesn't exist, return an error message
+            msg = "Account does not exist. Please enter a valid account number."
+            return render(request, 'cart/order_confirm.html', {'msg': msg})
 
         # Check if the user has enough balance to proceed with the order
         if acct.balance >= total:
@@ -178,6 +229,7 @@ def show_booking_form(request):
 
 
 
+
 #workin
 def send_receipt_email(request, latest_order):
     user = request.user
@@ -208,15 +260,9 @@ def send_receipt_email(request, latest_order):
 
 
 
-
-
-
-
 def order_view(request):
     user = request.user
     o = Order.objects.filter(user=user)
-
-
     return render(request,'cart/order_view.html', {'o': o,'u':user.username})
 
 

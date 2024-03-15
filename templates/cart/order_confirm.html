@@ -7,7 +7,9 @@
 <div class="container">
      <h3 class="text-center text-success">{{msg}}</h3>
      <h3 class="text-center text-success">Thank you</h3>
-     <p class="text-center"><a href=""> continue shopping</p>
+     <p class="text-center"><a href="{% url 'app1:packages' %}"> continue shopping</p>
+
+     <p class="text-center"><a href="{% url 'cart:booking_form' %}"> Back to payment</p>
 
 
 

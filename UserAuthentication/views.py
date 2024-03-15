@@ -1,5 +1,6 @@
-
 from django.contrib.auth import authenticate,login,logout
+from django.utils.crypto import get_random_string
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -7,21 +8,16 @@ from django.shortcuts import render, redirect
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError
-from django.utils.crypto import get_random_string
-
-
-from django.contrib.auth.hashers import make_password
-
-
+from django.db.models import Q
 
 def register(request):
     if request.method == "POST":
-        u = request.POST['u']
-        p = request.POST['p']
-        p1 = request.POST['p1']
-        e = request.POST['e']
-        f = request.POST['f']
-        l = request.POST['l']
+        u = request.POST.get('u')
+        p = request.POST.get('p')
+        p1 = request.POST.get('p1')
+        e = request.POST.get('e')
+        f = request.POST.get('f')
+        l = request.POST.get('l')
 
         # Password validation
         errors = []
@@ -46,7 +42,12 @@ def register(request):
             return redirect('UserAuthentication:register')  # Redirect back to registration form with error messages
 
         try:
-            # If no errors, create the user
+            # Check if the email address already exists
+            if User.objects.filter(Q(email=e)).exists():
+                messages.error(request, "Email address already exists. Please use a different email address.")
+                return redirect('UserAuthentication:register')
+
+            # If no errors and email address is unique, create the user
             user = User.objects.create_user(username=u, password=p, email=e, first_name=f, last_name=l)
 
             # Send confirmation email
@@ -56,7 +57,7 @@ def register(request):
             to_email = [e]  # Use the provided email address
             send_mail(subject, message, from_email, to_email)
 
-            # Registration successful message
+            # Registration successful message using SweetAlert
             messages.success(request, "Registration successful. You can now login.")
             return redirect('UserAuthentication:login')
 
@@ -65,8 +66,6 @@ def register(request):
             return redirect('UserAuthentication:register')  # Redirect back to registration form with error message
 
     return render(request, 'userAuth/register.html')
-
-
 
 
 
@@ -123,8 +122,6 @@ def email_confirm(request):
             messages.error(request, 'Invalid email address.')
 
     return render(request, 'userAuth/email_confirm.html')
-
-
 
 
 

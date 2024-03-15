@@ -2,11 +2,79 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<style>
+    /* Custom styles for the booking form page */
+    .booking-form form {
+        margin-top: 50px;
+        padding: 20px;
+        background-color: #f9f9f9; /* Light gray background */
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Border shadow effect */
+        width: 80%;
+        max-width: 600px;
+    }
+
+    .booking-form label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    .booking-form input[type="text"],
+    .booking-form input[type="tel"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        transition: border-color 0.3s ease-in-out;
+    }
+
+    .booking-form input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #fb641b; /* Flipkart orange */
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .booking-form input[type="submit"]:hover {
+        background-color: #f3320b; /* Darker shade on hover */
+    }
+
+    /* Animation effects */
+    @keyframes zoomIn {
+        from {
+            transform: scale(0.9);
+        }
+        to {
+            transform: scale(1);
+        }
+    }
+
+    .booking-form form[data-aos="zoom-in"] {
+        animation: zoomIn 0.5s ease-in-out;
+    }
+
+    /* Tilt effect */
+    .booking-form form[data-tilt] {
+        transform-style: preserve-3d;
+        transition: transform 0.5s;
+    }
+
+    .booking-form form[data-tilt]:hover {
+        transform: rotateX(5deg) rotateY(5deg);
+    }
+</style>
 
 <center>
     <h1>Booking Form</h1>
     <p>Total Amount: {{ total_amount }}</p>
-    <form method="post" class="register-myform" data-aos="zoom-in" data-tilt>
+    <form method="post" class="booking-form register-myform" data-aos="zoom-in" data-tilt>
         {% csrf_token %}
         <label for="address">Address:</label>
         <input type="text" id="address" name="address" required><br>
@@ -21,4 +89,5 @@
         </div>
         <input type="submit" value="Payment">
     </form>
+</center>
 {% endblock %}
