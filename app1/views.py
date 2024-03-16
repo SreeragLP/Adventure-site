@@ -5,6 +5,11 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import AdventurePackage, Rating
 
+from datetime import datetime, timedelta
+from django.shortcuts import render
+from .models import AdventurePackage
+
+
 @ensure_csrf_cookie
 def home(request):
     if request.method == "POST":
@@ -34,7 +39,9 @@ def packages(request):
 
 def detailed_view(request,p):
     a=AdventurePackage.objects.get(name=p)
-    return render(request,'home/detailed_view.html', {'a':a})
+    # Calculate the maximum date (90 days from today)
+    max_date = (datetime.today() + timedelta(days=90)).strftime('%Y-%m-%d')
+    return render(request,'home/detailed_view.html', {'a':a, 'max_date': max_date})
 
 
 def rating(request, package_name):

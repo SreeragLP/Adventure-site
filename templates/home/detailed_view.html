@@ -96,7 +96,8 @@
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="selected_date">Select a date:</label>
-                            <input type="date" id="selected_date" name="selected_date" class="form-control" min="{% now 'Y-m-d' %}" required>
+                            <input type="date" id="selected_date" name="selected_date" class="form-control" min="{% now 'Y-m-d' %}"
+                                   max="{{ max_date }}" required>
                         </div>
                         <div class="form-group">
                             <label for="total_persons">Total persons:</label>
