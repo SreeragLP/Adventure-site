@@ -7,10 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Packages</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-color: #dbdae3;
         }
 
         .container {
@@ -22,33 +23,37 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+
         }
 
         .card {
             margin: 10px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: 0.3s;
+            border-radius: 160px;
+            box-shadow: 0 4px 12px rgba(3.5, 4.5, 5, 3.1);
+            transition: 1.3s;
             width: 18rem; /* Adjust the width of the cards */
             transform-style: preserve-3d; /* Add preserve-3d */
             transform: perspective(10000px); /* Add perspective */
         }
 
         .card:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 16px rgba(0, 3.5, 0, 0.2);
         }
 
         .card-img-top {
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
+            border-radius: 100px;
+
+            border-top-left-radius: 150px;
+            border-top-right-radius: 150px;
             height: 220px; /* Set a fixed height for all card images */
             object-fit: cover; /* Ensure the images cover the entire area */
-            transform: translateZ(20px); /* Add translateZ for pop-out effect */
+            transform: translateZ(70px); /* Add translateZ for pop-out effect */
         }
 
         .card-body {
+
             text-align: center;
-            transform: translateZ(20px); /* Add translateZ for pop-out effect */
+            transform: translateZ(30px); /* Add translateZ for pop-out effect */
         }
 
         .btn-primary {
@@ -64,15 +69,29 @@
     </style>
 </head>
 <body>
-    <div class="container" data-aos="fade-right">
-        <div class="card-container">
+
+<audio autoplay loop>
+    <h1>hi</h1>
+    <source src="{% static 'Cornfield Chase.mp3' %}" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+
+
+    <div class="container" >
+        <div class="card-container"  >
             {% for package in packages %}
-                <div class="card" data-tilt>
-                    <img src="{{ package.image.url }}" class="card-img-top" alt="{{ package.name }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ package.name }}</h5>
+                <div class="card"  data-tilt  data-aos="zoom-in"  >
+                    <img src="{{ package.image.url }}" class="card-img-top" alt="{{ package.name }}" data-aos="zoom-in"
+                        data-aos="fade-up"
+                        data-aos-duration="3000" >
+
+                    <div  class="card-body"   >
+                        <h5 class="card-title" data-aos="zoom-in" >{{ package.name }}</h5>
                         <p class="card-text"></p>
-                        <a href="{% url 'app1:detailed_view' package.name %}" class="btn btn-primary">Details</a>
+                        <a href="{% url 'app1:detailed_view' package.name %}" class="btn btn-primary"
+                        data-aos="fade-up"
+                            data-aos-duration="2200" data-tilt data-tilt-reset="false" >Details</a>
                     </div>
                 </div>
             {% endfor %}

@@ -34,7 +34,7 @@ urlpatterns = [
     path('orderview',views.order_view,name="orderview"),
 
 
-    path('receipt/', views.send_receipt_email, name='receipt'),
+    #path('receipt/', views.send_receipt_email, name='receipt'),
 
 
 

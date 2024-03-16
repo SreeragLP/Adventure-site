@@ -1,11 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import AdventurePackage, Cart,Order, Account
+from .models import AdventurePackage, Cart, Order, Account
 from django.contrib.auth.decorators import login_required
-from django.template.loader import render_to_string
-from django.http import HttpResponse
+import qrcode
 from django.core.mail import EmailMessage
 from io import BytesIO
-from xhtml2pdf import pisa
 
 
 def add_to_cart(request, p):
@@ -73,106 +71,6 @@ def delete_cart_item(request, pk):
 
 
 
-
-#OG
-
-# def show_booking_form(request):
-#     user = request.user
-#     cart_items = Cart.objects.filter(user=user)
-#     total = 0
-#     for item in cart_items:
-#         item.subtotal = item.total_persons * item.items.price
-#         total += item.subtotal
-#
-#     if request.method == "POST":
-#         address = request.POST.get('address')
-#         phone_number = request.POST.get('phone_number')
-#         account_number = request.POST.get('number')
-#
-#         acct = Account.objects.get(accnumber=account_number)
-#
-#         # Check if the user has enough balance to proceed with the order
-#         if acct.balance >= total:
-#             # Process the order
-#             for item in cart_items:
-#                 order = Order.objects.create(
-#                     user=user,
-#                     package=item.items,
-#                     no_of_persons=item.total_persons,
-#                     address=address,
-#                     phone=phone_number,
-#                     order_status="paid",
-#                     selected_date=item.selected_date
-#                 )
-#             # Clear the cart
-#             cart_items.delete()
-#             # Deduct the total amount from the user's account balance
-#             acct.balance -= total
-#             acct.save()
-#
-#             # Send receipt email
-#             send_receipt_email(request, order)
-#
-#             msg = 'Order placed successfully'
-#             return render(request, 'cart/order_confirm.html', {'msg': msg})
-#         else:
-#             msg = "Insufficient balance. Please recharge your account."
-#             return render(request, 'cart/order_confirm.html', {'msg': msg})
-#
-#     return render(request, 'cart/booking_form.html', {'total_amount': total})
-
-
-
-
-# def show_booking_form(request):
-#     user = request.user
-#     cart_items = Cart.objects.filter(user=user)
-#     total = 0
-#     order = None  # Initialize order variable
-#
-#     for item in cart_items:
-#         item.subtotal = item.total_persons * item.items.price
-#         total += item.subtotal
-#
-#     if request.method == "POST":
-#         address = request.POST.get('address')
-#         phone_number = request.POST.get('phone_number')
-#         account_number = request.POST.get('number')
-#
-#         acct = Account.objects.get(accnumber=account_number)
-#
-#         # Check if the user has enough balance to proceed with the order
-#         if acct.balance >= total:
-#             # Process the order
-#             for item in cart_items:
-#                 order = Order.objects.create(
-#                     user=user,
-#                     package=item.items,
-#                     no_of_persons=item.total_persons,
-#                     address=address,
-#                     phone=phone_number,
-#                     order_status="paid",
-#                     selected_date=item.selected_date
-#                 )
-#             # Clear the cart
-#             cart_items.delete()
-#             # Deduct the total amount from the user's account balance
-#             acct.balance -= total
-#             acct.save()
-#
-#             # Send receipt email
-#             send_receipt_email(request, order)
-#
-#             msg = 'Order placed successfully'
-#             return render(request, 'cart/order_confirm.html', {'msg': msg})
-#         else:
-#             msg = "Insufficient balance. Please recharge your account."
-#             return render(request, 'cart/order_confirm.html', {'msg': msg})
-#
-#     return render(request, 'cart/booking_form.html', {'total_amount': total})
-#
-#
-
 def show_booking_form(request):
     user = request.user
     cart_items = Cart.objects.filter(user=user)
@@ -215,8 +113,35 @@ def show_booking_form(request):
             acct.balance -= total
             acct.save()
 
-            # Send receipt email
-            send_receipt_email(request, order)
+            # Generate QR code
+            qr = qrcode.QRCode(
+                version=1,
+                error_correction=qrcode.constants.ERROR_CORRECT_L,
+                box_size=10,
+                border=4,
+            )
+            qr.add_data(str(order.id))  # Use order ID as the QR code data
+            qr.make(fit=True)
+            qr_image = qr.make_image(fill_color="black", back_color="white")
+
+            # Convert QR code image to bytes
+            img_buffer = BytesIO()
+            qr_image.save(img_buffer, format='PNG')
+            img_buffer.seek(0)
+
+            # Send email with QR code attachment
+            email_body = f"Hello {user.username},\n\n"
+            email_body += "Thank you for your booking. Attached is your booking QR code.\n\n"
+            email_body += "Please do not share your QR code with anybody.\n\n"
+            email_body += "This is your ticket.\n"
+
+            email = EmailMessage(
+                subject='Your Booking QR Code',
+                body=email_body,
+                to=[user.email],
+            )
+            email.attach('booking_qr_code.png', img_buffer.getvalue(), 'image/png')
+            email.send()
 
             msg = 'Booking successfully placed'
             return render(request, 'cart/order_confirm.html', {'msg': msg})
@@ -225,40 +150,6 @@ def show_booking_form(request):
             return render(request, 'cart/order_confirm.html', {'msg': msg})
 
     return render(request, 'cart/booking_form.html', {'total_amount': total})
-
-
-
-
-
-#workin
-def send_receipt_email(request, latest_order):
-    user = request.user
-
-    # Render the HTML template with order details
-    context = {'o': [latest_order], 'u': user.username}
-    html_content = render_to_string('cart/receipt_template.html', context)
-
-    # Create a PDF file
-    result = BytesIO()
-    pdf = pisa.pisaDocument(BytesIO(html_content.encode("UTF-8")), result)
-
-    if not pdf.err:
-        # PDF creation successful, attach it to the email
-        email = EmailMessage(
-            subject='Your Order Details',
-            body='Please find attached your order details.',
-            to=[user.email],
-        )
-        email.attach('order_details.pdf', result.getvalue(), 'application/pdf')
-        email.send()
-
-        return HttpResponse("Order details sent successfully")
-    else:
-        # PDF creation failed
-        return HttpResponse("Error creating PDF: {}".format(pdf.err))
-
-
-
 
 def order_view(request):
     user = request.user

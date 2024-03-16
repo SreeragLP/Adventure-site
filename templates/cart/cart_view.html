@@ -5,7 +5,9 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col">
-            <h1 class="text-center mb-4">Your Booking Cart</h1>
+            <h1 class="text-center mb-4" data-aos="fade-down"
+     data-aos-easing="up"
+     data-aos-duration="700">Your Booking Cart</h1>
         </div>
     </div>
     {% if not cart_items %}
@@ -17,16 +19,20 @@
                 <a href="{% url 'app1:packages' %}" class="btn btn-primary">Start Booking</a>
                 <div class="row mt-5">
                     <div class="col text-center" data-tilt data-tilt-reset="false">
-                        <img src="{% static 'images/rc.png' %}" height="175px" width="165px">
+                        <img src="{% static 'images/rc.png' %}" height="175px" width="165px" data-aos="zoom-in">
                     </div>
                 </div>
             </div>
         </div>
     </div>
     {% else %}
-    <div class="row">
-        <div class="col">
-            <table class="table table-bordered table-hover">
+    <div class="row"  >
+        <div class="col"   data-aos="fade-down"
+     data-aos-easing="linear"
+     data-aos-duration="500">
+            <table class="table table-bordered table-hover"  data-aos="zoom-in"  data-aos="flip-left"
+     data-aos-easing="ease-out-cubic"
+     data-aos-duration="700">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Package Name</th>
@@ -42,7 +48,7 @@
                     {% for item in cart_items %}
                     <tr>
                         <td>{{ item.items.name }}</td>
-                        <td><img src="{{ item.items.image.url }}" alt="Package Image" style="max-width: 100px;"></td>
+                        <td ><img src="{{ item.items.image.url }}" alt="Package Image" style="max-width: 100px;"></td>
                         <td>{{ item.items.price }}</td>
                         <td>{{ item.total_persons }}</td>
                         <td>{{ item.selected_date }}</td>
@@ -57,10 +63,10 @@
             </table>
             <p class="font-weight-bold text-right">Total: {{ total }}</p>
             <div class="text-center">
-                <a href="{% url 'cart:booking_form' %}" class="btn btn-primary btn-lg">Proceed to Checkout</a>
+                <a href="{% url 'cart:booking_form' %}" class="btn btn-success btn-lg">Proceed to Checkout</a>
                 <div class="row mt-5">
                     <div class="col text-center" data-tilt data-tilt-reset="false">
-                        <img src="{% static 'images/rc.png' %}" height="175px" width="165px">
+                        <img src="{% static 'images/rc.png' %}" height="175px" width="165px" data-aos="zoom-in">
                     </div>
                 </div>
             </div>

@@ -2,16 +2,23 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
+
 <div class="container-fluid bg-dark py-5">
+
     <div class="row justify-content-center">
+
         <div class="col-lg-6">
             <div class="text-center text-white">
-                <h2 class="display-4 mb-3" style="color:white;">{{ msg }}</h2>
+
+                <h5 class="display-4 mb-3" style="color:white;">{{ msg }}</h5>
                 <h3 class="display-5 mb-4" style="color:white;">Thank you</h3>
                 {% if msg == 'Booking successfully placed' %}
                 <p class="lead mb-4">
                     Your adventure has been booked successfully. Keep exploring for more thrilling experiences!
                 </p>
+                    </form>
+
                 <a href="{% url 'app1:packages' %}" class="btn btn-success btn-lg">Continue Exploring</a>
                 {% else %}
                 <p class="lead mb-4">
@@ -19,6 +26,7 @@
                 </p>
                 <a href="{% url 'cart:booking_form' %}" class="btn btn-danger btn-lg">Go Back to Payment</a>
                 {% endif %}
+
             </div>
         </div>
     </div>

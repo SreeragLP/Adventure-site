@@ -3,19 +3,60 @@
 {% load static %}
 {% block content %}
 
+
+<style>
+
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+h2 {
+    color: #2874f0;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+label {
+    font-size: 18px;
+    color: #333;
+}
+
+input[type="number"],
+input[type="date"],
+button {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    margin-top: 20px;
+
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+</style>
+
 <div class="container">
     <h2>Edit Cart Item</h2>
-    <form method="post">
+    <form method="post" class="myform">
         {% csrf_token %}
         <label for="total_persons">Total Persons:</label>
-<!--        <input type="number" id="total_persons" name="total_persons" value="{{ cart_item.total_persons }}" required>-->
-
         <input type="number" id="total_persons" name="total_persons" value="{{ cart_item.total_persons }}"
-        min="1" required>
+               min="1" required>
+
         <label for="selected_date">Selected Date:</label>
         <input type="date" id="selected_date" name="selected_date" value="{{ cart_item.selected_date }}"
                min="{% now 'Y-m-d' %}" required>
-        <button type="submit" class="btn btn-primary">Update</button>
+
+        <button type="submit" style=" background-color:orange">Update</button>
     </form>
 </div>
 
