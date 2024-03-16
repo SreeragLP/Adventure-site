@@ -5,6 +5,8 @@ import qrcode
 from django.core.mail import EmailMessage
 from io import BytesIO
 
+from datetime import datetime, timedelta
+
 
 def add_to_cart(request, p):
     if request.user.is_authenticated:
@@ -54,13 +56,15 @@ def cart_view(request):
 
 @login_required()
 def edit_cart_item(request, pk):
+    # Calculate the maximum date (90 days from today)
+    max_date = (datetime.today() + timedelta(days=90)).strftime('%Y-%m-%d')
     cart_item = get_object_or_404(Cart, pk=pk)
     if request.method == 'POST':
         cart_item.total_persons = request.POST.get('total_persons')
         cart_item.selected_date = request.POST.get('selected_date')
         cart_item.save()
         return redirect('cart:cart_view')
-    return render(request, 'cart/edit_cart_item.html', {'cart_item': cart_item})
+    return render(request, 'cart/edit_cart_item.html', {'cart_item': cart_item,'max_date': max_date})
 
 
 

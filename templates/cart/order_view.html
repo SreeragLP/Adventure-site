@@ -56,7 +56,7 @@
                         <div class="col-md-12">
                             <div style="text-align: left;">
                                 <p><strong>Package:</strong> {{ order.package.name }}</p>
-                                <h6>{{ order.no_of_persons }} × ${{ order.package.price }}</h6>
+                                <h6>{{ order.no_of_persons }} × ₹{{ order.package.price }}</h6>
                                 <p>{{ order.selected_date }}</p>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                 <div class="collapse" id="collapseDetails{{ order.id }}">
                     <div class="card card-body dropdown-box">
                         <p><strong>Order Date:</strong> {{ order.date_added }}</p>
-                        <p><strong>Subtotal:</strong> ${{ order.subtotal }}</p>
+                        <p><strong>Subtotal:</strong> ₹{{ order.subtotal }}</p>
                         <p><strong>Payment Status:</strong> {{ order.order_status }}</p>
                         <hr>
                         <p><strong>Name:</strong> {{ u }}</p>

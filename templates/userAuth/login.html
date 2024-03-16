@@ -38,6 +38,7 @@
 
     .login-form-group {
         margin-bottom: 20px;
+        position: relative;
     }
 
     .login-input {
@@ -45,6 +46,14 @@
         padding: 10px;
         border-radius: 5px;
         border: 1px solid #ccc;
+    }
+
+    .eye-icon {
+        position: absolute;
+        top: 50%;
+        right: 30px; /* Adjust as needed */
+        transform: translateY(-50%);
+        cursor: pointer;
     }
 
     .login-btn {
@@ -64,8 +73,8 @@
     .login-link {
         color: #007bff;
         text-decoration: none;
-        font-size: 18px; font-weight: bold;
-
+        font-size: 18px;
+        font-weight: bold;
     }
 
     .login-link:hover {
@@ -76,10 +85,14 @@
         color: red;
         text-align: center;
     }
+
+    .hide {
+        display: none;
+    }
 </style>
 
 <div class="login-form-container">
-    <form method="POST" class="login-form" data-aos="zoom-in" >
+    <form method="POST" class="login-form" data-aos="zoom-in">
         <h3 class="login-title">Login Here</h3>
         {% csrf_token %}
 
@@ -89,13 +102,18 @@
         </div>
 
         <div class="login-form-group">
-            <label class="login-label"><strong>Password</strong></label>
-            <input type="password" class="login-input" name="p" placeholder="Enter password">
+            <label  style="position: relative; width: 360px;"><strong>Password</strong>
+                <input type="password" class="login-input" id="password" name="p" placeholder="Enter password" >
+                <button type="button" id="togglePassword" onclick="togglePasswordVisibility('password')" class="hide-eye" style="position: absolute; top: 70%; right: 20px; transform: translateY(-50%); background: none; border: none;"><i class="fas fa-eye" style="color: #999;"></i></button>
+
+
+            </label>
         </div>
 
         <div class="login-form-group">
             <center>
                 <input type="submit" class="login-btn" value="Login">
+            </center>
         </div>
 
         <div class="login-form-group">
@@ -108,14 +126,29 @@
 
         <div class="login-message">
             {% if messages %}
-            <ul>
-                {% for msg in messages %}
-                <li>{{ msg }}</li>
-                {% endfor %}
-            </ul>
+                <ul>
+                    {% for msg in messages %}
+                        <li>{{ msg }}</li>
+                    {% endfor %}
+                </ul>
             {% endif %}
         </div>
     </form>
 </div>
+
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        var passwordInput = document.getElementById('password');
+        var eyeIcon = document.getElementById('togglePassword');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            eyeIcon.innerHTML = '<i class="fas fa-eye-slash" style="color: #999;"></i>';
+        } else {
+            passwordInput.type = 'password';
+            eyeIcon.innerHTML = '<i class="fas fa-eye" style="color: #999;"></i>';
+        }
+    });
+</script>
 
 {% endblock %}

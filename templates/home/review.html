@@ -63,7 +63,7 @@
                 <div class="review-card-left" data-aos="fade-down"
      data-aos-easing="linear"
      data-aos-duration="400">
-                    <p ><strong>{{ rating.user.username }}</strong></p>
+                    <p ><strong>{{ rating.user.first_name }} <span>{{ rating.user.last_name }}</strong></p>
                     <p >
                         <strong >
                             {% if rating.rating == 1 %}
@@ -96,8 +96,8 @@
                     </script>
                 </div>
                 <div class="review-card-right" data-aos="fade-down"
-     data-aos-easing="linear"
-     data-aos-duration="400">
+                    data-aos-easing="linear"
+                    data-aos-duration="400">
                     <p><strong>Package Name:</strong> {{ rating.package.name }}</p>
                     <p><strong>Feedback:</strong> {{ rating.feedback }}</p>
                 </div>
