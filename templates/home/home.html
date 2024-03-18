@@ -142,7 +142,7 @@
 										<h1 class="text-uppercase text-white">New Adventure</h1>
 										<p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod temp <br>
 										or incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
-										<a href="{% url 'app1:packages' %}" class="text-uppercase header-btn">Discover Now</a>
+										<a href="{% url 'app1:packages' %}" class="text-uppercase header-btn" style="text-decoration: none;">Discover Now</a>
 									</div>
 								</div>
 
@@ -159,7 +159,7 @@
 										<h1 class="text-uppercase text-white">New Trip</h1>
 										<p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod temp <br>
 										or incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
-										<a href="{% url 'app1:packages' %}" class="text-uppercase header-btn">Discover Now</a>
+										<a href="{% url 'app1:packages' %}" class="text-uppercase header-btn" style="text-decoration: none;" >Discover Now</a>
 									</div>
 								</div>
 							</div>
@@ -175,7 +175,7 @@
 										<h1 class="text-uppercase text-white">New Experience</h1>
 										<p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod temp <br>
 										or incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
-										<a href="{% url 'app1:packages' %}" class="text-uppercase header-btn">Discover Now</a>
+										<a href="{% url 'app1:packages' %}" class="text-uppercase header-btn" style="text-decoration: none;" >Discover Now</a>
 									</div>
 								</div>
 							</div>
@@ -280,7 +280,7 @@
 
 
 			<!-- Start feature Area -->
-			<section class="feature-area section-gap" id="secvice">
+			<section class="feature-area section-gap"  id="secvice">
 				<div class="container">
 					<div class="row d-flex justify-content-center">
 						<div class="menu-content pb-60 col-lg-8">
@@ -295,7 +295,7 @@
 							<div class="single-feature mb-30">
 								<div class="title d-flex flex-row pb-20">
 									<span class="lnr lnr-user"></span>
-									<h4><a href="#">Expert Technicians</a></h4>
+									<h4>Expert Technicians</h4>
 								</div>
 								<p>
 									Usage of the Internet is becoming more common due to rapid advancement of technology and power.
@@ -306,7 +306,7 @@
 							<div class="single-feature mb-30">
 								<div class="title d-flex flex-row pb-20">
 									<span class="lnr lnr-license"></span>
-									<h4><a href="#">Professional Service</a></h4>
+									<h4>Professional Service</a></h4>
 								</div>
 								<p>
 									Usage of the Internet is becoming more common due to rapid advancement of technology and power.
@@ -317,7 +317,7 @@
 							<div class="single-feature mb-30">
 								<div class="title d-flex flex-row pb-20">
 									<span class="lnr lnr-phone"></span>
-									<h4><a href="#">Great Support</a></h4>
+									<h4>Great Support</a></h4>
 								</div>
 								<p>
 									Usage of the Internet is becoming more common due to rapid advancement of technology and power.
@@ -328,7 +328,7 @@
 							<div class="single-feature">
 								<div class="title d-flex flex-row pb-20">
 									<span class="lnr lnr-rocket"></span>
-									<h4><a href="#">Technical Skills</a></h4>
+									<h4>Technical Skills</a></h4>
 								</div>
 								<p>
 									Usage of the Internet is becoming more common due to rapid advancement of technology and power.
@@ -339,7 +339,7 @@
 							<div class="single-feature">
 								<div class="title d-flex flex-row pb-20">
 									<span class="lnr lnr-diamond"></span>
-									<h4><a href="#">Highly Recomended</a></h4>
+									<h4>Highly Recomended</a></h4>
 								</div>
 								<p>
 									Usage of the Internet is becoming more common due to rapid advancement of technology and power.
@@ -350,7 +350,7 @@
 							<div class="single-feature">
 								<div class="title d-flex flex-row pb-20">
 									<span class="lnr lnr-bubble"></span>
-									<h4><a href="#">Positive Reviews</a></h4>
+									<h4>Positive Reviews</a></h4>
 								</div>
 								<p>
 									Usage of the Internet is becoming more common due to rapid advancement of technology and power.
@@ -523,12 +523,15 @@
 					<div class="row">
 						<div class="col-lg-5 col-md-6 col-sm-6" style="text-light;">
 							<div class="single-footer-widget" >
-								<h6>About Us</h6>
+								<h6><a class="nav-link active" aria-current="page" href="{% url 'app1:about' %}"
+									   style="color:white;">About Us</a></h6>
+
+
 								<p style="color: white;">
 									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.
 								</p>
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            		<p style="color: white;" class="footer-text">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+            		<p style="color: white;" class="footer-text">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | </i> by Rishi Cost.com <a href="https://colorlib.com" target="_blank"></a></p>
             		<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							</div>
 						</div>
@@ -565,9 +568,9 @@
 								<p style="color: white;">Let us be social</p>
 								<div class="footer-social d-flex align-items-center">
 									<a href="https://www.facebook.com/share/zpq6M9SfiVZRGA68/?mibextid=qi2Omg"><i class="fa fa-facebook"></i></a>
-									<a href="https://x.com/RishikeshTour?s=20"><i class="fa fa-twitter"></i></a>
+									<a href="https://x.com/RishikeshTour?s=20"><i class="fa-brands fa-x-twitter"></i></a>
 									<a href="https://www.instagram.com/rishikesh_rafting_and_camping?igsh=dDlrOHVsN3llOHJu"><i class="fab fa-instagram"></i></a>
-									<a href="#"><i class="fa fa-behance"></i></a>
+									<a href="http://wa.link/r3nzam"><i class="fa fa-whatsapp"></i></a>
 								</div>
 							</div>
 						</div>
