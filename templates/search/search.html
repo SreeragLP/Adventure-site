@@ -7,10 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Results</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-color: #dbdae3;
         }
 
         .container {
@@ -18,53 +19,75 @@
             margin-bottom: 20px;
         }
 
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
         .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: 0.3s;
-            border-radius: 10px;
-            margin-bottom: 20px;
+            margin: 10px;
+            border-radius: 100px;
+            box-shadow: 0 4px 12px rgba(3.5, 4.5, 5, 3.1);
+            transition: 1.3s;
+            width: 18rem; /* Adjust the width of the cards */
+            transform-style: preserve-3d; /* Add preserve-3d */
+            transform: perspective(1000px); /* Add perspective */
         }
 
         .card:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 16px rgba(0, 3.5, 0, 0.2);
         }
 
         .card-img-top {
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
+            border-radius: 50px;
+            border-top-left-radius: 70px;
+            border-top-right-radius: 70px;
+            height: 200px; /* Set a fixed height for all card images */
+            object-fit: cover; /* Ensure the images cover the entire area */
+            transform: translateZ(35px); /* Add translateZ for pop-out effect */
         }
 
         .card-body {
             text-align: center;
+            transform: translateZ(30px); /* Add translateZ for pop-out effect */
         }
 
         .btn-primary {
-            background-color: #007bff;
+            background-color: #6f42c1;
             border-color: #007bff;
             border-radius: 20px;
         }
 
         .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
+            background-color: #6f42c1;
+            border-color: #6f42c1;
         }
     </style>
 </head>
 <body>
+<center>
     <div class="container">
-        <div class="row">
+        <div class="card-container">
             {% for item in p %}
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card">
-                    <img src="{{ item.image.url }}" class="card-img-top" height="250" alt="{{ item.name }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ item.name }}</h5>
-                        <p class="card-text">{{ item.price }}</p>
-                        <a href="{% url 'app1:detailed_view' item.name %}" class="btn btn-primary">Details</a>
-                    </div>
+            <div class="card" data-tilt data-aos="fade-down" data-aos-easing="linear" data-aos-duration="400">
+                <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.name }}</h5>
+                    <p class="card-text">{{ item.price }}</p>
+                    <a href="{% url 'app1:detailed_view' item.name %}" class="btn btn-primary">Details</a>
                 </div>
             </div>
             {% empty %}
+            <center>
+                <style>
+
+                  body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+        }
+
+                </style>
             <div class="col">
                 <h6>No Results Found</h6>
                 <img src="{% static 'images/no.gif' %}" class="img-fluid" alt="No Results Found">
@@ -72,6 +95,14 @@
             {% endfor %}
         </div>
     </div>
+
+    <!-- Include Tilt.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
+
+    <!-- Initialize Tilt.js for all cards -->
+    <script>
+        $('.card').tilt();
+    </script>
 </body>
 </html>
 
