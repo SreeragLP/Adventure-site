@@ -22,6 +22,7 @@ app_name="search"
 
 urlpatterns = [
     path('searchresult', views.searchresult, name="searchresult"),
+    path('price_range',views.price_range,name="price_range")
 
 
 ]

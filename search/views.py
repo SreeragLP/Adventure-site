@@ -13,3 +13,16 @@ def searchresult(request):
             packages=AdventurePackage.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
 
     return render(request,'search/search.html',{'p':packages,'q':query})
+
+
+# def price_range(request):
+#     return render(request,'search/search.html')
+
+
+def price_range(request):
+    if request.method == "POST":
+        max_price = request.POST.get('q', '')
+        if max_price:
+            packages = AdventurePackage.objects.filter(price__lte=max_price)
+            return render(request, 'search/search.html', {'p': packages, 'q': '', 'max_price': max_price})
+    return render(request, 'search/search.html')

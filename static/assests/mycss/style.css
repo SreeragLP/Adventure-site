@@ -242,6 +242,69 @@ body {
 }
 
 
+/* PRICE RANGE  */
 
-/* styles.css */
+.attractive-range {
+    width: 100%; /* Ensure the range slider takes up the full width */
+    -webkit-appearance: none; /* Remove default styles for WebKit browsers */
+    appearance: none; /* Remove default styles for other browsers */
+    height: 10px; /* Set the height of the range slider */
+    background: linear-gradient(to right, #ff7e5f, #feb47b); /* Set a gradient background color */
+    outline: none; /* Remove the outline */
+    border-radius: 5px; /* Set the border radius */
+    margin-top: 10px; /* Adjust the top margin */
+}
+
+.attractive-range::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Remove default styles for WebKit browsers */
+    appearance: none; /* Remove default styles for other browsers */
+    width: 20px; /* Set the width of the thumb */
+    height: 20px; /* Set the height of the thumb */
+    border-radius: 50%; /* Make the thumb round */
+    background: #fff; /* Set the background color of the thumb */
+    cursor: pointer; /* Set the cursor to pointer */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Add a shadow to the thumb */
+}
+
+
+
+
+
+  .attractive-range::-moz-range-thumb {
+    width: 20px; /* Set the width of the thumb for Firefox */
+    height: 20px; /* Set the height of the thumb for Firefox */
+    background: #007bff; /* Set the background color of the thumb for Firefox */
+    cursor: pointer; /* Change cursor to pointer */
+    border-radius: 50%; /* Set the border radius for Firefox */
+  }
+
+  /* Custom CSS for the price range form */
+  .price-range-form {
+    margin-top: 20px; /* Adjust the top margin */
+  }
+
+  /* Custom CSS for the price range label */
+  .price-range-label {
+    font-weight: bold; /* Make the label bold */
+  }
+
+  /* Custom CSS for the price range input */
+  .price-range-input {
+    width: 100%; /* Set the width to 100% */
+    padding: 5px; /* Add padding */
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 5px; /* Set the border radius */
+    margin-top: 5px; /* Adjust the top margin */
+  }
+
+  /* Custom CSS for the price range buttons */
+  .price-range-button {
+    padding: 5px 10px; /* Add padding */
+    margin-top: 5px; /* Adjust the top margin */
+    cursor: pointer; /* Change cursor to pointer */
+    border: none; /* Remove border */
+    background-color: #007bff; /* Set background color */
+    color: #fff; /* Set text color */
+    border-radius: 5px; /* Set the border radius */
+  }
 

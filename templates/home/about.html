@@ -64,12 +64,90 @@
             transform: translateY(0);
         }
     }
+
+
+    @import url("https://fonts.googleapis.com/css2?family=Changa:wght@200..800&display=swap");
+
+h1 {
+  --initial-delay: 1s;
+  --letter-delay: 0.2s;
+
+  color: #eee;
+  font-family: Changa, fantasy;
+  text-transform: uppercase;
+  font-size: 2.5vw;
+  font-weight: 200;
+  animation: hollywood 2s var(--initial-delay) both;
+
+  display: flex;
+
+  span {
+    --start-delay: var(--initial-delay);
+
+    display: block;
+    text-align: center;
+
+    opacity: 0;
+    animation: zichtbaar 2s var(--start-delay) both;
+
+    &:nth-child(2) {
+      --start-delay: calc(var(--initial-delay) + (var(--letter-delay) * 1));
+    }
+    &:nth-child(3) {
+      --start-delay: calc(var(--initial-delay) + (var(--letter-delay) * 2));
+    }
+    &:nth-child(4) {
+      --start-delay: calc(var(--initial-delay) + (var(--letter-delay) * 3));
+    }
+    &:nth-child(5) {
+      --start-delay: calc(var(--initial-delay) + (var(--letter-delay) * 4));
+    }
+    &:nth-child(6) {
+      --start-delay: calc(var(--initial-delay) + (var(--letter-delay) * 5));
+    }
+    &:nth-child(7) {
+      --start-delay: calc(var(--initial-delay) + (var(--letter-delay) * 6));
+    }
+  }
+}
+
+@keyframes hollywood {
+  0% {
+    gap: 0vw;
+  }
+  100% {
+    gap: 8vw;
+  }
+}
+
+@keyframes zichtbaar {
+  0% {
+    opacity: 0;
+    filter: blur(1em);
+    transform: translateY(-100px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0em);
+    transform: translateY(0);
+  }
+}
+
 </style>
 
 <div class="container">
+
+
+
+
+
     <div class="row">
+
         <div class="col-lg-8 offset-lg-2 about-container" data-aos="flip-left" >
-            <h1 class="about-title" data-tilt>Journey into the Realm of Adventure</h1>
+
+            <h1 class="about-title" data-tilt>Rishi cost Journey into   <img src="{% static 'images/rc.png' %}"
+                                                                             style="width:95px" class="img-fluid">
+                the Adventure</span></h1>
             <div class="about-content">
                 <p>Rishi Cost Adventures, located in Rishikesh, India, is your ultimate destination for thrilling adventure experiences amidst the breathtaking natural beauty of the Himalayas.</p>
                 <p>We specialize in providing a wide range of adventure activities, including cliff jumping, cycling tours, yoga retreats, river rafting, and much more. With our team of experienced guides and top-notch equipment, we ensure a safe and unforgettable adventure for every visitor.</p>
@@ -100,4 +178,7 @@
         </div>
     </div>
 </div>
+
+
+
 {% endblock %}

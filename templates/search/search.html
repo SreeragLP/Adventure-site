@@ -63,36 +63,66 @@
             background-color: #6f42c1;
             border-color: #6f42c1;
         }
+
+        .vertical-line {
+            border-left: 1px solid black; /* Vertical line styling */
+            height: 100%; /* Set the height to match the container */
+            position: absolute;
+            left: 50%;
+            top: 0;
+        }
     </style>
 </head>
 <body>
+
 <center>
     <div class="container">
-        <div class="card-container">
-            {% for item in p %}
-            <div class="card" data-tilt data-aos="fade-down" data-aos-easing="linear" data-aos-duration="400">
-                <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ item.name }}</h5>
-                    <p class="card-text">{{ item.price }}</p>
-                    <a href="{% url 'app1:detailed_view' item.name %}" class="btn btn-primary">Details</a>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card-container">
+                    {% for item in p %}
+                    <div class="card" data-tilt data-aos="fade-down" data-aos-easing="linear" data-aos-duration="400">
+                        <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.name }}</h5>
+                            <p class="card-text">{{ item.price }}</p>
+                            <a href="{% url 'app1:detailed_view' item.name %}" class="btn btn-primary">Details</a>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <center>
+                        <style>
+                            body {
+                                font-family: Arial, sans-serif;
+                                background-color: white;
+                            }
+                        </style>
+                    <div class="col">
+                        <h6>No Results Found</h6>
+                        <img src="{% static 'images/no.gif' %}" class="img-fluid" alt="No Results Found">
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
-            {% empty %}
-            <center>
-                <style>
+            <div class="col-lg-1 position-relative"> <!-- Added position relative to the column -->
+                <div class="vertical-line"></div> <!-- Vertical line divider -->
+                </div>
 
-                  body {
-            font-family: Arial, sans-serif;
-            background-color: white;
-        }
+            <div class="col-lg-3">
 
-                </style>
-            <div class="col">
-                <h6>No Results Found</h6>
-                <img src="{% static 'images/no.gif' %}" class="img-fluid" alt="No Results Found">
+                <form action="{% url 'search:price_range' %}" method="POST"  class="price-range-form">
+                    {% csrf_token %}
+                    <div  class="price-range-form-group">
+                        <label  class="price-range-label"><strong>Price Range</strong></label>
+                        <input type="number" class="price-range-input" id="prange" name="q" placeholder="Enter price" min="100" value="500" required>
+                    </div>
+
+                    <label for="customRange2"  class="price-range-label" style="margin:10px";>Set your range</label>
+                    <input type="range"  class="attractive-range" min="1" max="10" id="customRange2" oninput="updatePriceFromRange()">
+
+                    <button type="submit"  class="attractive-btn" style="margin:10px";>Submit</button>
+                </form>
             </div>
-            {% endfor %}
         </div>
     </div>
 
@@ -102,6 +132,31 @@
     <!-- Initialize Tilt.js for all cards -->
     <script>
         $('.card').tilt();
+
+        function increasePrice() {
+            var priceInput = document.getElementById("prange");
+            var price = parseInt(priceInput.value);
+            if (price < 1000) { // Maximum increase of 1000
+                price += 100;
+                priceInput.value = price;
+            }
+        }
+
+        function decreasePrice() {
+            var priceInput = document.getElementById("prange");
+            var price = parseInt(priceInput.value);
+            if (price > 100) { // Minimum decrease of 100
+                price -= 100;
+                priceInput.value = price;
+            }
+        }
+
+        function updatePriceFromRange() {
+            var rangeInput = document.getElementById("customRange2");
+            var priceInput = document.getElementById("prange");
+            var selectedValue = parseInt(rangeInput.value) * 100; // Each step represents 100 increment
+            priceInput.value = selectedValue;
+        }
     </script>
 </body>
 </html>
