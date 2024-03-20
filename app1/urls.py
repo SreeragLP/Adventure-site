@@ -36,6 +36,8 @@ urlpatterns = [
 
     path('about', views.about, name="about"),
 
+    path('test',views.test,name="test")
+
 
 
 

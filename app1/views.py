@@ -75,6 +75,9 @@ def review(request):
     ratings = Rating.objects.all()
     return render(request, 'home/review.html', {'ratings': ratings})
 
+def test(request):
+    return render(request,'home/test.html')
+
 
 
 

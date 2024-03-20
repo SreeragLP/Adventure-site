@@ -168,7 +168,7 @@ body > svg {
   text-transform: uppercase;
   font-family: "Limelight", sans-serif;
   font-size: 3.5em;
-  line-height: 0.7;
+  line-height: 0.5;
 }
 
 #background path {
@@ -201,11 +201,227 @@ body > svg {
 }
 
 
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Inter", sans-serif;
+}
+
+:root {
+	--light: #ffe6e6;
+	--dark: #0c0c0c;
+}
+
+.container {
+	--bg-color: radial-gradient(
+		circle at 50% 0%,
+		rgba(50, 50, 50, 1) 0%,
+		rgba(12, 12, 12, 1) 100%
+	);
+
+	overflow: clip;
+	position: relative;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	padding: 2rem 5rem;
+
+	width: 100%;
+	height: 100dvh;
+	background-image: var(--bg-color);
+}
+
+.category_container {
+	--gap: 0.5rem;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: nowrap;
+	gap: calc(var(--gap) * 2);
+
+	width: 100%;
+	height: 100%;
+}
+
+.content {
+	--active: 0;
+
+	cursor: pointer;
+	overflow: clip;
+
+	position: relative;
+	z-index: 10;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	gap: 1.5rem;
+
+	padding: 2.5rem;
+
+	width: calc((100% / 3) - var(--gap));
+	height: 100%;
+
+	border-radius: 1rem;
+
+	transition: width 0.5s ease-in-out;
+}
+.content:hover {
+	--active: 1;
+
+	width: calc(70% - var(--gap));
+}
+.content::before {
+	content: "";
+
+	position: absolute;
+	z-index: -10;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100%;
+	background-color: var(--dark);
+
+	opacity: 0.6;
+}
+
+.img {
+	position: absolute;
+	z-index: -20;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100%;
+
+	object-fit: cover;
+	object-position: center;
+}
+
+.content .profile_image {
+	opacity: calc(1 - var(--active));
+
+	transition: opacity 0.3s ease-in-out;
+}
+
+.profile_detail {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+
+	width: 12rem;
+	transition: transform 0.5s cubic-bezier(0.23, 0.93, 0.77, 1) 0.01s;
+}
+
+.profile_detail span {
+	font-size: 1.5rem;
+	font-weight: 600;
+	color: var(--light);
+	text-wrap: nowrap;
+}
+
+.profile_detail p {
+	font-size: 0.75rem;
+	font-weight: 500;
+	color: var(--light);
+}
+
+.profile_quote {
+	width: 22rem;
+	transform: translate(0, calc((1 - var(--active)) * (100% + 2.5rem)));
+}
+
+.profile_quote p {
+	font-size: 1.5rem;
+	font-weight: 600;
+	color: var(--light);
+
+	transform: translate(0, calc((1 - var(--active)) * (100% + 2.5rem)));
+
+	transition: transform 0.5s cubic-bezier(0.23, 0.93, 0.77, 1) 0.1s;
+}
+
+
+
+
+
+
+
+
+
+//
+//	create an 'accordion' wrapper for the quote text
+//	1 set initial height to zero fr
+//	2 add overflow hidden to hide quote text
+//	3 add transtion for grid-template-rows
+//
+.wrapper {
+	display: grid;
+  	grid-template-rows: 0fr;
+  	overflow: hidden;
+	transition: grid-template-rows 0.5s cubic-bezier(0.23, 0.93, 0.77, 1) 0.01s;
+}
+
+//
+//  add min-height 0 on the quote text to override the
+// 	default max-content of fr - add a bit of individual
+//. animation for the quote (to not follow detail)
+//
+.profile_quote {
+	min-height: 0;
+	transform: translateY(50%);
+	opacity: 0;
+	transition:
+		opacity 0.8s ease-in-out,
+		transform 0.8s cubic-bezier(0.23, 0.93, 0.77, 1) 0.01s
+	;
+}
+
+
+// 	expand (animated) wrapper row height to 1 fr
+//	(this will animate detail up when making room for quote)
+.content:hover .wrapper {
+  	grid-template-rows: 1fr;
+}
+
+// remove translate to male quote slide in
+.content:hover .profile_quote {
+	transform: none;
+	opacity: 1;
+}
+
+
+
+
+
+
+
+// credit note
+dialog { position: absolute; z-index: 1; background: none; color: white; border: 0; font-size: .8rem; padding:.5em;}
+dialog a { color: whitesmoke; }
+
+
 </style>
 
 <!--<div class="container">-->
 
 
+<audio autoplay loop>
+
+    <source src="{% static 'Hp.mp3' %}" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
 
 
 
@@ -371,15 +587,91 @@ body > svg {
 </div>
 
 
+<div>
+
+
+    <!-- quick fix to load assets from github -->
+
+<!-- lazy dog credit note -->
+<!--<dialog open>Reply to <a href="https://twitter.com/asanagih/status/1764194084435181573" target="_blank"> tweet</a> by <a href="https://hasanmolla.vercel.app/" target="_blank">HASAN MOLLA</a></dialog>-->
+
+
+
+
+<section class="container" data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom">
+	<div class="category_container">
+		<div class="content">
+<!--			<img src="assets/UI UX Designer.jpg" class="professio_image" alt="Profession" />-->
+<!--			<img src="assets/John Doe.jpg" class="profile_image" alt="Profile" />-->
+            <img src="{% static 'images/uu2.jpg' %}"  class="profession_image" alt="Cliff Jumping" />
+			<div class="profile_detail">
+				<span>Great Customer Support</span>
+				<p>100+ customer suppoters</p>
+			</div>
+
+			<div class="wrapper">
+				<div class="profile_quote">
+					<p>"24/7 Support: Our team is here for you, day and night, ensuring smooth sailing and expert
+                        guidance whenever you need it"</p>
+				</div>
+			</div>
+
+		</div>
+		<div class="content">
+<!--			<img src="assets/Photographer.jpg" class="profession_image" alt="Profession" />-->
+<!--			<img src="assets/Prince Akashi.jpg" class="profile_image" alt="Profile" />-->
+            <img src="{% static 'images/uu1.jpg' %}"  class="profession_image" alt="Cliff Jumping" />
+			<div class="profile_detail">
+				<span>Great Accommodation</span>
+				<p>100 + hotal connections</p>
+			</div>
+			<div class="wrapper">
+				<div class="profile_quote">
+					<p>"Comfy Stays: Relax in style with our hotel partnerships,
+                        offering cozy accommodations for your post-adventure unwind"</p>
+                    </div>
+			</div>
+		</div>
+		<div class="content">
+<!--			<img src="assets/Fashion Designer.jpg" class="profession_image" alt="Profession" />-->
+            <img src="{% static 'images/uu4.jpg' %}"  class="profession_image" alt="Cliff Jumping" />
+<!--			<img src="assets/Rafaella Mendes.jpg" class="profile_image" alt="Profile" />-->
+
+
+			<div class="profile_detail">
+				<span>Top-notch Safety Measures</span>
+				<p>100 + safty officers</p>
+			</div>
+			<div class="wrapper">
+				<div class="profile_quote">
+					<p>"Our top priority is your safety. With guided tours and top-notch equipment,
+                        we guarantee a thrilling yet secure experience."</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+</div>
+
+
+
+
+
+
 
 <div class="container" data-aos="fade-up"
      data-aos-anchor-placement="top-bottom">
 <center>
-<div class="row justify-content-center">
+<div class="row justify-content-center" data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom">
+
     <div class="col-lg-5" >
         <!-- Map iframe code goes here -->
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d27613.298215624673!2d78.27673606594988!3d30.103857146858342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3909162324d8cf93%3A0xadfa6b0f5ff126a6!2sRafting%20In%20Rishikesh!5e0!3m2!1sen!2sin!4v1710921326136!5m2!1sen!2sin"
-                width="100%" height="320" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
     <div class="col-lg-5" style="padding:25px;">
         <!-- Paragraph about Rishikesh adventure tourism -->
@@ -389,6 +681,19 @@ body > svg {
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
