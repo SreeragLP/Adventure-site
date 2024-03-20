@@ -76,7 +76,7 @@
 <body>
 
 <center>
-    <div class="container">
+<!--    <div class="container">-->
         <div class="row">
             <div class="col-lg-8">
                 <div class="card-container">
@@ -108,7 +108,7 @@
                 <div class="vertical-line"></div> <!-- Vertical line divider -->
                 </div>
 
-            <div class="col-lg-3">
+            <div class="col-lg-2">
 
                 <form action="{% url 'search:price_range' %}" method="POST"  class="price-range-form">
                     {% csrf_token %}
@@ -120,7 +120,7 @@
                     <label for="customRange2"  class="price-range-label" style="margin:10px";>Set your range</label>
                     <input type="range"  class="attractive-range" min="1" max="10" id="customRange2" oninput="updatePriceFromRange()">
 
-                    <button type="submit"  class="attractive-btn" style="margin:10px";>Submit</button>
+                    <button type="submit"  class="attractive-btn" style="margin:10px"; data-aos="zoom-in-up">Submit</button>
                 </form>
             </div>
         </div>

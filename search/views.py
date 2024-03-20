@@ -15,9 +15,6 @@ def searchresult(request):
     return render(request,'search/search.html',{'p':packages,'q':query})
 
 
-# def price_range(request):
-#     return render(request,'search/search.html')
-
 
 def price_range(request):
     if request.method == "POST":

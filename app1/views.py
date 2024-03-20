@@ -65,7 +65,7 @@ def rating(request, package_name):
     return render(request, 'home/rating.html', context)
 
 
-\
+
 def thanks(request):
     return render(request, 'home/thanks.html')
 
