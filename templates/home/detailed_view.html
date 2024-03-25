@@ -91,7 +91,8 @@
                 <div class="package-details">
                     <h2>{{ a.name }}</h2>
                     <p class="description">{{ a.description }}</p>
-                    <p class="price">Price: {{ a.price }}</p>
+                    <p class="price">Price: {{ a.price }}</p> <span>
+                    <p class="price">Location :{{ a.location }}</p></span>
                     <form method="post" action="{% url 'cart:add_to_cart' a.name %}">
                         {% csrf_token %}
                         <div class="form-group">

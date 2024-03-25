@@ -10,6 +10,8 @@ class AdventurePackage(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to='adventure_package_images/')
     image1 = models.ImageField(upload_to='adventure_package_images/')
+    location = models.CharField(max_length=100, null=True, blank=True)
+
 
 
 
