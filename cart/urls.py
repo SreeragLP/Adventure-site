@@ -34,6 +34,11 @@ urlpatterns = [
     path('orderview',views.order_view,name="orderview"),
 
 
+    path('cancel/<int:pk>/', views.delete_order_view, name='delete_order_view'),
+
+    path('refund', views.refund, name='refund'),
+
+
     #path('receipt/', views.send_receipt_email, name='receipt'),
 
 

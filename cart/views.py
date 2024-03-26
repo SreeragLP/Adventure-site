@@ -161,6 +161,11 @@ def order_view(request):
     return render(request,'cart/order_view.html', {'o': o,'u':user.username})
 
 
+def delete_order_view(request, pk):
+    order_view = get_object_or_404(Order, pk=pk)
+    order_view.delete()
+    return redirect('cart:refund')
 
 
-
+def refund(request):
+    return render(request,'cart/refund.html')

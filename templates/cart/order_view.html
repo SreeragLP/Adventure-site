@@ -51,6 +51,7 @@
                         <div class="col-md-12">
                             <img src="{{ order.package.image.url }}" class="img-fluid img-custom rounded-start" alt="Package Image">
                         </div>
+
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -71,6 +72,8 @@
                         <p><strong>Name:</strong> {{ u }}</p>
                         <p><strong>Address:</strong> {{ order.address }}</p>
                         <p><strong>Phone:</strong> {{ order.phone }}</p>
+
+                         <a href="{% url 'cart:delete_order_view' order.pk %}" class="btn btn-sm btn-danger"><i class="fas fa-times"></i> Cancel</a>
                     </div>
                 </div>
             </div>

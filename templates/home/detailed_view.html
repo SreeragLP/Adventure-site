@@ -81,17 +81,20 @@
                         <div class="carousel-item active" data-tilt data-tilt-scale="1.1">
                             <img src="{{ a.image.url }}" class="d-block w-100" alt="Figma Image">
                         </div>
+
+
                         <!-- Add more carousel items as needed -->
                     </div>
                     <!-- Add carousel controls here -->
                 </div>
+                <h6 style="margin-top:20px;color:black;">(all events starts at 10 am)</h6>
             </div>
             <div class="col-md-6" >
                 <!-- Form -->
                 <div class="package-details">
                     <h2>{{ a.name }}</h2>
                     <p class="description">{{ a.description }}</p>
-                    <p class="price">Price: {{ a.price }}</p> <span>
+                    <p class="price">Price: {{ a.price }} (food & accomadation included)</p> <span>
                     <p class="price">Location :{{ a.location }}</p></span>
                     <form method="post" action="{% url 'cart:add_to_cart' a.name %}">
                         {% csrf_token %}
