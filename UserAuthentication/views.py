@@ -53,7 +53,7 @@ def register(request):
             # Send confirmation email
             subject = 'Registration Successful'
             message = f"Hello {u},\n\nThank you for registering with us. Your account has been successfully created.\n\nYou can now login to your account."
-            from_email = 'sreeragp10@gmail.com'  # Update with your Gmail address
+            from_email = 'rishiquestt@gmail.com'  # Update with your Gmail address
             to_email = [e]  # Use the provided email address
             send_mail(subject, message, from_email, to_email)
 
@@ -112,7 +112,7 @@ def email_confirm(request):
             # Send the OTP to the user's email address
             subject = 'OTP for Password Reset'
             message = f'Your OTP for password reset is: {otp}'
-            from_email = 'sreeragp10@gmail.com'  # Replace with your email address
+            from_email = 'rishiquestt@gmail.com'  # Replace with your email address
             to_email = [email]
             send_mail(subject, message, from_email, to_email)
 
