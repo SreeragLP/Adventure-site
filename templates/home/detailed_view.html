@@ -70,38 +70,38 @@
     }
 </style>
 
-<div class="container" style="box-shadow:  0 2px 4px rgba(111, 66, 193, 5.4);">
-    <div class="image-form-container" data-aos="fade-up"
-     data-aos-duration="800">
+<div class="container" style="box-shadow: 0 2px 4px rgba(111, 66, 193, 5.4);">
+    <div class="image-form-container" data-aos="fade-up" data-aos-duration="800">
         <div class="row">
             <div class="col-md-6">
                 <!-- Carousel -->
                 <div id="customCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active" data-tilt data-tilt-scale="1.1">
-                            <img src="{{ a.image.url }}" class="d-block w-100" alt="Figma Image">
+                            <img src="{{ a.image.url }}" class="d-block w-100" alt="Package Image">
                         </div>
-
-
                         <!-- Add more carousel items as needed -->
                     </div>
                     <!-- Add carousel controls here -->
                 </div>
-                <h6 style="margin-top:20px;color:black;">(all events starts at 10 am)</h6>
+                <h6 style="margin-top:20px;color:black;">(all events start at 10 am)</h6>
             </div>
-            <div class="col-md-6" >
+            <div class="col-md-6">
                 <!-- Form -->
                 <div class="package-details">
                     <h2>{{ a.name }}</h2>
                     <p class="description">{{ a.description }}</p>
-                    <p class="price">Price: {{ a.price }} (food & accomadation included)</p> <span>
-                    <p class="price">Location :{{ a.location }}</p></span>
+                    <p class="price">Price: {{ a.price }}</p>
+                    <p class="price">Food & Accommodation: ₹ {{ a.accommodation_price_per_person }}</p> <!-- Display food and accommodation price -->
                     <form method="post" action="{% url 'cart:add_to_cart' a.name %}">
                         {% csrf_token %}
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="include_food_and_accommodation" name="include_food_and_accommodation">
+                            <label class="form-check-label" for="include_food_and_accommodation">Include Food & Accommodation</label>
+                        </div>
                         <div class="form-group">
                             <label for="selected_date">Select a date:</label>
-                            <input type="date" id="selected_date" name="selected_date" class="form-control" min="{% now 'Y-m-d' %}"
-                                   max="{{ max_date }}" required>
+                            <input type="date" id="selected_date" name="selected_date" class="form-control" min="{% now 'Y-m-d' %}" max="{{ max_date }}" required>
                         </div>
                         <div class="form-group">
                             <label for="total_persons">Total persons:</label>
@@ -114,5 +114,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}

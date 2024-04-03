@@ -12,11 +12,14 @@ class AdventurePackage(models.Model):
     image1 = models.ImageField(upload_to='adventure_package_images/')
     location = models.CharField(max_length=100, null=True, blank=True)
 
-
-
+    accommodation_price_per_person = models.DecimalField(max_digits=10, decimal_places=2, null=True,
+                                                         blank=True)  # Add this line
 
     def __str__(self):
         return self.name
+
+    def subtotal(self):
+        return self.price
 
 
 # models.py

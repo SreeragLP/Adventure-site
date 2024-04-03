@@ -215,11 +215,11 @@
                         <!-- Display notification details -->
                         <h5 class="mb-2">{{ i.package.name }}</h5>
                         <p class="mb-2">Start Date: {{ i.selected_date }}</p>
-                        <p>Subtotal: {{ i.subtotal }}</p>
+<!--                        <p>Subtotal: {{ i.subtotal }}</p>-->
                         <p>Payment Status: {{ i.order_status }}</p>
                         <!-- Conditionally display the "Rate your package" link -->
                         {% if i.is_completed %}
-                            {% if i.user_has_rated %}
+                            {% if  i.user_has_rated %}
                                  <i class="fas fa-check-circle" style="color:green;"></i>
                         <span  style="color:green;">You have already rated this package.</span>
 
@@ -245,7 +245,7 @@
             </ul>
         {% else %}
             <!-- Display message if there are no notifications -->
-            <p>No notifications</p>
+            <p>No notifications </p>
         {% endif %}
     </div>
 </div>

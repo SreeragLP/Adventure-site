@@ -1,13 +1,11 @@
-<!DOCTYPE html>
 {% extends 'base.html' %}
 {% load static %}
+
 {% block content %}
 <div class="container mt-5">
     <div class="row">
         <div class="col">
-            <h1 class="text-center mb-4" data-aos="fade-down"
-     data-aos-easing="up"
-     data-aos-duration="700">Your Booking Cart</h1>
+            <h1 class="text-center mb-4" data-aos="fade-down" data-aos-easing="up" data-aos-duration="700">Your Booking Cart</h1>
         </div>
     </div>
     {% if not cart_items %}
@@ -26,13 +24,9 @@
         </div>
     </div>
     {% else %}
-    <div class="row"  >
-        <div class="col"   data-aos="fade-down"
-     data-aos-easing="linear"
-     data-aos-duration="500">
-            <table class="table table-bordered table-hover"  data-aos="zoom-in"  data-aos="flip-left"
-     data-aos-easing="ease-out-cubic"
-     data-aos-duration="700">
+    <div class="row">
+        <div class="col" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="500">
+            <table class="table table-bordered table-hover" data-aos="zoom-in" data-aos-easing="ease-out-cubic" data-aos-duration="700">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Package Name</th>
@@ -40,6 +34,8 @@
                         <th scope="col">Price</th>
                         <th scope="col">Total Persons</th>
                         <th scope="col">Selected Date</th>
+                        <th scope="col">Include Food & Accommodation</th>
+                        <th scope="col">Accommodation Amount</th>
                         <th scope="col">Subtotal</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -48,10 +44,24 @@
                     {% for item in cart_items %}
                     <tr>
                         <td>{{ item.items.name }}</td>
-                        <td ><img src="{{ item.items.image.url }}" alt="Package Image" style="max-width: 100px;"></td>
+                        <td><img src="{{ item.items.image.url }}" alt="Package Image" style="max-width: 100px;"></td>
                         <td>{{ item.items.price }}</td>
                         <td>{{ item.total_persons }}</td>
                         <td>{{ item.selected_date }}</td>
+                        <td>
+                            {% if item.include_food_and_accommodation %}
+                                 <h6 style="color:green">Included</h6>
+                            {% else %}
+                                <h6 style="color:red">Not Included</h6>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if item.include_food_and_accommodation %}
+                                {{ item.accommodation_amount_per_person }}
+                            {% else %}
+                                0
+                            {% endif %}
+                        </td>
                         <td>{{ item.subtotal }}</td>
                         <td>
                             <a href="{% url 'cart:edit_cart_item' item.pk %}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> Edit</a>

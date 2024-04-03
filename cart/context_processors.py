@@ -54,3 +54,69 @@ def menu_links(request):
 
 
 
+# cart/context_processors.py
+
+# cart/context_processors.py
+
+# from cart.models import Order
+#
+# def menu_links(request):
+#     user = request.user
+#     context = {}
+#
+#     if user.is_authenticated:
+#         # Retrieve orders for the logged-in user
+#         orders = Order.objects.filter(user=user)
+#
+#         # Calculate subtotal for each order dynamically
+#         for order in orders:
+#             try:
+#                 subtotal = order.no_of_persons * order.package.food_and_accommodation_price_per_person
+#             except AttributeError:
+#                 # Handle case where the attribute doesn't exist
+#                 subtotal = order.no_of_persons * order.package.price
+#
+#             # Assign the calculated subtotal to the order object
+#             order.subtotal = subtotal
+#
+#         # Add orders to the context
+#         context['orders'] = orders
+#
+#     return context
+#
+
+
+
+# from cart.models import Order
+# from app1.models import Rating
+#
+# def menu_links(request):
+#     user = request.user
+#     context = {}
+#
+#     if user.is_authenticated:
+#         # Retrieve orders for the logged-in user
+#         orders = Order.objects.filter(user=user)
+#
+#         # Calculate subtotal for each order dynamically and check if the user has rated the package
+#         for order in orders:
+#             try:
+#                 subtotal = order.no_of_persons * order.package.food_and_accommodation_price_per_person
+#             except AttributeError:
+#                 # Handle case where the attribute doesn't exist
+#                 subtotal = order.no_of_persons * order.package.price
+#
+#             # Assign the calculated subtotal to the order object
+#             order.subtotal = subtotal
+#
+#             # Check if the user has rated the package
+#             order.user_has_rated = Rating.objects.filter(user=user, package=order.package, has_rated=True).exists()
+#
+#         # Add orders to the context
+#         context['orders'] = orders
+#
+#         # Retrieve rating information for the logged-in user
+#         user_ratings = Rating.objects.filter(user=user)
+#         context['user_ratings'] = user_ratings
+#
+#     return context
